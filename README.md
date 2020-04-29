@@ -1,6 +1,6 @@
 # Organizer
 
-####This project is made for automation and pleasant visualization of user's income, tasks and costs.
+This project is made for automation and pleasant visualization of user's income, tasks and costs.
 <h2> Getting Started</h2>
 
 
