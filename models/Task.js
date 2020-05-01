@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const uniqueValidator = require('mongoose-unique-validator')
 const tasksSchema = new Schema({
     name: {
         type: String,
@@ -20,5 +21,5 @@ const tasksSchema = new Schema({
         ref: 'user'
     }
 })
-
+tasksSchema.plugin(uniqueValidator)
 module.exports = mongoose.model('task', tasksSchema )

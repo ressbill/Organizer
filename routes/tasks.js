@@ -1,9 +1,12 @@
 const express = require('express')
+
 const router = express.Router()
 const tasksController = require('../controllers/tasks')
-router.get('/tasks', tasksController.getAllTasks)
-router.post('/task', tasksController.create)
-router.patch('/:id', tasksController.update)
-router.delete('/:id', tasksController.remove)
+const authGuard = require('../middlewares/authguard')
+
+router.get('/', authGuard, tasksController.getAllTasks)
+router.post('/', authGuard, tasksController.create)
+router.patch('/:id', authGuard, tasksController.update)
+router.delete('/:id', authGuard, tasksController.remove)
 
 module.exports = router
