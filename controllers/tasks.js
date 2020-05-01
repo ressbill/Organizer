@@ -19,19 +19,24 @@ exports.getAllTasks = async (req, res, next) => {
     }
     if (req.query.previous === 'true') {
         query.date = {
-            $lte : new Date()
+            $lte: new Date()
         }
     }
     if (req.query.previous === 'false' || !req.query.previous) {
         query.date = {
-            $gte : new Date()
+            $gte: new Date()
         }
     }
-    //TODO
     if (req.query.date) {
+        const start = new Date(req.query.date)
+        start.setDate(start.getDate())
+        start.setHours(0, 0, 0, 0)
+        const end = new Date(req.query.date)
+        end.setDate(end.getDate())
+        end.setHours(23, 59, 59, 59)
         query.date = {
-            $gte : new Date(),
-            $lt: new Date() +1
+            $gte: start,
+            $lt: end
         }
     }
     try {
@@ -48,6 +53,7 @@ exports.getAllTasks = async (req, res, next) => {
 }
 
 exports.create = async (req, res, next) => {
+    console.log('data', req.body.date)
     const task = {name: req.body.name, text: req.body.text, date: req.body.date, creator: req.userData.userId}
     try {
         const createdTask = await Task.create(task)
@@ -66,8 +72,16 @@ exports.update = async (req, res, next) => {
                 {$set: {name: req.body.name, text: req.body.text}},
                 {new: true, useFindAndModify: false}
             )
-            res.status(202).json(candidate)
+            if (candidate) {
+                res.status(202).json(candidate)
+            } else {
+                const error = new Error('No task found')
+                error.status = 404
+                next(error)
+            }
+
         } catch (e) {
+            e.message = '\'No task found\''
             next(e)
         }
     } else {
