@@ -1,4 +1,7 @@
 const Task = require('../models/Task')
+const {validationResult} = require('express-validator')
+const validation = require('../utils/validation')
+const moment = require('moment')
 //
 // n1 = 5 offset = 10
 // ?previous=true&limit=n1&offset=n2
@@ -12,7 +15,7 @@ exports.getAllTasks = async (req, res, next) => {
         creator: req.userData.userId
     }
     if (!req.query.limit) {
-        req.query.limit = 10
+        req.query.limit = 2
     }
     if (!req.query.offset) {
         req.query.offset = 0
@@ -22,7 +25,7 @@ exports.getAllTasks = async (req, res, next) => {
             $lte: new Date()
         }
     }
-    if (req.query.previous === 'false' || !req.query.previous) {
+    if (req.query.previous === 'false') {
         query.date = {
             $gte: new Date()
         }
@@ -53,11 +56,30 @@ exports.getAllTasks = async (req, res, next) => {
 }
 
 exports.create = async (req, res, next) => {
-    console.log('data', req.body.date)
-    const task = {name: req.body.name, text: req.body.text, date: req.body.date, creator: req.userData.userId}
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        const error = validation.checkValidationAndFormErrorMessage(errors)
+        return next(error)
+    }
+    const task = {name: req.body.name, text: req.body.text, creator: req.userData.userId}
     try {
+
+        // Form date with a help of moment.js out of req.body.date.
+        // If parse failed returns null.Otherwise ISODate
+
+        const isValid = moment(req.body.date).isValid()
+        if (!isValid) {
+            return res.status(406).json({message: 'Date is wrong'})
+        }
+        // const isoDate = moment(req.body.date).toISOString()
+        // if (isoDate === null) {
+        //     return res.status(406).json({message: 'Date is wrong'})
+        // }
+
+        const isoDate = moment(req.body.date).toISOString()
+        task.date = isoDate
         const createdTask = await Task.create(task)
-        res.status(200).json(createdTask)
+        res.status(201).json(createdTask)
     } catch (e) {
         const error = new Error(`Saving is failed. Task: '${req.body.name}' is already created`)
         error.status = 409
@@ -65,7 +87,7 @@ exports.create = async (req, res, next) => {
     }
 }
 exports.update = async (req, res, next) => {
-    if (req.body.name && req.body.text) {
+    if (req.body.name) {
         try {
             const candidate = await Task.findOneAndUpdate(
                 {creator: req.userData.userId, _id: req.params.id},
@@ -73,7 +95,7 @@ exports.update = async (req, res, next) => {
                 {new: true, useFindAndModify: false}
             )
             if (candidate) {
-                res.status(202).json(candidate)
+                res.status(200).json(candidate)
             } else {
                 const error = new Error('No task found')
                 error.status = 404
@@ -97,7 +119,7 @@ exports.remove = async (req, res, next) => {
         if (result.n > 0) {
             res.status(200).json({message: 'Task deleted successfully'})
         } else {
-            res.status(200).json({message: 'There is no such task'})
+            res.status(404).json({message: 'There is no such task'})
         }
     } catch (e) {
         const error = new Error('Deletion failed')

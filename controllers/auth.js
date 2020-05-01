@@ -43,7 +43,11 @@ exports.register = async (req, res, next) => {
 }
 
 exports.login = async (req, res, next) => {
-    console.log(jwtSecret)
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        const error = validation.checkValidationAndFormErrorMessage(errors)
+        return next(error)
+    }
     const candidate = await User.findOne({email: req.body.email})
     if (!candidate) {
         res.status(404).json({message: `${req.body.email} is not registered`})

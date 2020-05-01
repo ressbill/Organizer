@@ -22,7 +22,12 @@ exports.userLogin = [
         .isLength({min: 5})
         .withMessage('Password should be at least 5 characters')
 ]
-
+exports.postCreate = [
+    body('name')
+        .trim()
+        .isLength({min: 3})
+        .withMessage('Name of the task must be at least 3 characters'),
+]
 
 exports.checkValidationAndFormErrorMessage = (errors) => {
         const errorsMessage = errors.errors.reduce((total, e) => {
