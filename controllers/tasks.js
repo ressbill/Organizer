@@ -15,7 +15,7 @@ exports.getAllTasks = async (req, res, next) => {
         creator: req.userData.userId
     }
     if (!req.query.limit) {
-        req.query.limit = 2
+        req.query.limit = 20
     }
     if (!req.query.offset) {
         req.query.offset = 0
@@ -25,7 +25,7 @@ exports.getAllTasks = async (req, res, next) => {
             $lte: new Date()
         }
     }
-    if (req.query.previous === 'false') {
+    if (!req.query.previous || req.query.previous === 'false') {
         query.date = {
             $gte: new Date()
         }

@@ -6,7 +6,7 @@ const authGuard = require('../middlewares/authguard')
 
 router.get('/', authGuard, tasksController.getAllTasks)
 router.post('/', authGuard,validation.postCreate, tasksController.create)
-router.patch('/:id', authGuard, tasksController.update)
+router.patch('/:id', authGuard,validation.postUpdate, tasksController.update)
 router.delete('/:id', authGuard, tasksController.remove)
 
 module.exports = router

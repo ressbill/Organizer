@@ -28,7 +28,12 @@ exports.postCreate = [
         .isLength({min: 3})
         .withMessage('Name of the task must be at least 3 characters'),
 ]
-
+exports.postUpdate = [
+    body('name')
+        .trim()
+        .isLength({min: 3})
+        .withMessage('Name of the task must be at least 3 characters'),
+]
 exports.checkValidationAndFormErrorMessage = (errors) => {
         const errorsMessage = errors.errors.reduce((total, e) => {
             return total += e.msg + '. '
