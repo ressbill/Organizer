@@ -3,15 +3,34 @@ const Schema = mongoose.Schema
 const userSchema = new Schema({
     costs: [
         {
-            type: Schema.Types.ObjectId,
-            ref: 'cost'
-        }
+            name: {
+                type: String,
+            },
+            price: {
+                type: Number,
+                required: true
+            },
+            date: {
+                type: Date,
+                default: Date.now
+            }
+        },
     ],
     income: [
         {
-            type: Schema.Types.ObjectId,
-            ref: 'income'
-        },
+            name: {
+                type: String,
+                required: true
+            },
+            amount: {
+                type: Number,
+                required: true
+            },
+            date: {
+                type: Date,
+                default: Date.now
+            }
+        }
     ],
     owner: {
         type: Schema.Types.ObjectID,
@@ -19,4 +38,4 @@ const userSchema = new Schema({
     }
 
 })
-module.exports = mongoose.model('wallet', userSchema)
+module.exports.wallet = mongoose.model('wallet', userSchema)

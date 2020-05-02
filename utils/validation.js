@@ -34,6 +34,17 @@ exports.postUpdate = [
         .isLength({min: 3})
         .withMessage('Name of the task must be at least 3 characters'),
 ]
+exports.incomeCreate = [
+    body('name')
+        .trim()
+        .notEmpty()
+        .withMessage('Name can\'t be empty ')
+    ,
+    body('amount', 'Amount can\'t be empty and must be a numeric ')
+        .trim()
+        .notEmpty()
+        .isNumeric()
+]
 exports.checkValidationAndFormErrorMessage = (errors) => {
         const errorsMessage = errors.errors.reduce((total, e) => {
             return total += e.msg + '. '
