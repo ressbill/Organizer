@@ -45,6 +45,17 @@ exports.incomeCreate = [
         .notEmpty()
         .isNumeric()
 ]
+exports.costCreate = [
+    body('name')
+        .trim()
+        .notEmpty()
+        .withMessage('Name can\'t be empty ')
+    ,
+    body('price', 'Price can\'t be empty and must be a numeric ')
+        .trim()
+        .notEmpty()
+        .isNumeric()
+]
 exports.checkValidationAndFormErrorMessage = (errors) => {
         const errorsMessage = errors.errors.reduce((total, e) => {
             return total += e.msg + '. '
