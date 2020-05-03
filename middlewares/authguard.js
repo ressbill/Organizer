@@ -1,3 +1,8 @@
+// Middleware for checking Bearer token in Authorization Header and
+// populating request with extracted data from token.
+
+
+
 const jwt = require('jsonwebtoken')
 const jwtKey = require('../utils/keys')['jwt_key']
 module.exports = async (req, res, next) => {

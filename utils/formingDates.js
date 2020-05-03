@@ -1,3 +1,5 @@
+// Forming date for using in CRUD operations
+
 const monthAgo = new Date()
 const numberOfDay = monthAgo.getDate()
 monthAgo.setDate(numberOfDay - 30)

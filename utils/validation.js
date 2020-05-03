@@ -1,3 +1,6 @@
+// Validation middlewares using express-validator
+// Function for forming validation error messages
+
 const {body} = require('express-validator')
 exports.userCreation = [
     body('email')
