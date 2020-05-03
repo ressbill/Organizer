@@ -81,9 +81,12 @@ exports.create = async (req, res, next) => {
         const createdTask = await Task.create(task)
         res.status(201).json(createdTask)
     } catch (e) {
-        const error = new Error(`Saving is failed. Task: '${req.body.name}' is already created`)
-        error.status = 409
-        next(error)
+        if(e.errors.name.kind === 'unique'){
+            e.message = "Name of the task must be unique"
+            e.status = 409
+            return next(e)
+        }
+        next(e)
     }
 }
 exports.update = async (req, res, next) => {

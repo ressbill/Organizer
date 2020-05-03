@@ -1,7 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
-const castAggregation = require('mongoose-cast-aggregation');
 const keys = require('./utils/keys')
 const app = express()
 mongoose.connect(keys.mongoURI,{useUnifiedTopology: true , useNewUrlParser: true})
@@ -35,11 +34,6 @@ app.use( (error, req, res, next) => {
     if(!error.status){
         error.status = 500
     }
-    // //TODO //
-    //Error of tasks.name uniqueness . Create appropriate response. error.name === "ValidationError"
-    // console.log(error)
-    //
-    // ////
     res.status(error.status).json({message: error.message})
 })
 module.exports = app
