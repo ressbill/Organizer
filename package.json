@@ -4,7 +4,11 @@
   "description": "Organizer project",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node index.js",
+    "server": "nodemon index.js",
+    "client_install": "npm install --prefix client",
+    "client": "npm run start --prefix client",
+    "dev": " concurrently \" npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -22,6 +26,7 @@
   },
   "homepage": "https://github.com/ressbill/Organizer#readme",
   "devDependencies": {
+    "concurrently": "^5.2.0",
     "nodemon": "^2.0.3"
   },
   "dependencies": {

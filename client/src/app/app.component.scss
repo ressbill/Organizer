@@ -1,0 +1,47 @@
+@import "../scss/colors";
+.costs{
+  color: $alert
+}
+.income{
+  color: $success;
+}
+.fi-book-bookmark{
+  color: #767676;
+  padding-left: 0.6rem;
+}
+.analytics{
+  transform: translateX(-1.85rem);
+  &::after{
+
+    content: "";
+    display: inline-block;
+    background: url("../assets/flat-color-icons_doughnut-chart.svg");
+    padding: 0;
+    margin-left: 0.4rem;
+    background-size: cover;
+    width: 1.9rem;
+    height: 1.9rem;
+  }
+}
+
+.list-item-link{
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+.tasks{
+  &:after{
+
+    content: "";
+    display: inline-block;
+    background: url("../assets/bx_bxs-calendar-edit.svg");
+    padding: 0;
+    margin-left: 0.4rem;
+    background-size: cover;
+    width: 1.9rem;
+    height: 1.9rem;
+  }
+}
+.app-title{
+  color: $secondary;
+}
