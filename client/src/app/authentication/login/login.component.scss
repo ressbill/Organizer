@@ -1,0 +1,71 @@
+@import "../../../scss/settings";
+
+.card {
+  max-width: 500px;
+  display: block;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-width: 0;
+  border-radius: 1px;
+  min-width: 350px;
+  width: 500px;
+
+}
+
+.btn {
+  border-radius: 50%;
+
+}
+
+.title-bar {
+  background: $dark-gray;
+}
+
+.error-input {
+  color: red;
+  font-size: 0.8rem;
+  display: block;
+  width: 60%;
+  margin: auto;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+}
+
+.title {
+  font-size: 200%;
+  color: rgb(240, 240, 240);
+}
+
+.mat-form-field {
+  width: 60%;
+  margin: 0 auto;
+  border-bottom-color: #fefefe;
+
+}
+
+.button {
+  border-radius: 25px;
+}
+
+.mb1 {
+  margin-bottom: 1rem;
+}
+.mb2 {
+  margin-bottom: 2rem;
+}
+
+.mu2 {
+  margin-top: 3rem;
+}
+
+
+.mu1 {
+  margin-top: 1rem;
+}
+.custom-input{
+  color: #fefefe;
+}

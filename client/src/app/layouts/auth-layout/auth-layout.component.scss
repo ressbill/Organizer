@@ -1,0 +1,16 @@
+@import "../../../scss/colors";
+.app-title{
+  color: $secondary;
+}
+.test{
+  color: $secondary;
+}
+.wallpaper{
+  background: url("../../../assets/blured-wallpaper.png") ;
+  background-size: cover;
+  width: 100%;
+  height: 95vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

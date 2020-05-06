@@ -1,15 +1,11 @@
-import {AfterViewInit, Component} from '@angular/core'
+import {Component} from '@angular/core'
+
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
+  template: `
+      <router-outlet></router-outlet>`,
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements AfterViewInit{
-  title = 'Organizer';
-  constructor(){
-  }
-  ngAfterViewInit(): void {
-    $('.dropdown').foundation()
+export class AppComponent {
 
-  }
 }

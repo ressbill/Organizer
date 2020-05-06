@@ -3,6 +3,10 @@
 @import '~foundation-sites/scss/foundation';
 @include foundation-everything(true);
 @import "./scss/foundation-icons.css";
+@import "./scss/custom-theme";
 .js-dropdown-active{
 margin-top: 1rem;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
