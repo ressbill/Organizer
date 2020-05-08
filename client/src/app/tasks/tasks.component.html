@@ -1,0 +1,24 @@
+
+<form [formGroup]="form" class="form">
+  <div class="grid">
+    <mat-form-field  color="accent">
+      <mat-label>Title</mat-label>
+      <input matInput >
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label>Some notes</mat-label>
+      <textarea matInput placeholder="Description..." [cols]="3"></textarea>
+    </mat-form-field>
+
+    <div class="calendar"><input type="text" class="span2" value="02-12-1989 12:05" id="dpt"></div>
+  </div>
+  <button mat-raised-button color="accent" type="submit"> Save </button>
+
+</form>
+<div *ngFor="let task of tasks">
+  <h1>{{task.name}}</h1>
+  <p>{{task.text}}</p>
+  <p>{{task.date}}</p>
+</div>
+

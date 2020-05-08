@@ -26,7 +26,7 @@ exports.register = async (req, res, next) => {
                 password
             })
             user.save().then(() => {
-                res.status(201).json(user)
+                res.status(201).json({message: 'User created successfully'})
             }).catch(e => {
                 const error = new Error('Saving to db failed')
                 error.status = 501
@@ -57,7 +57,7 @@ exports.login = async (req, res, next) => {
                  const token = jwt.sign(
                      {email: candidate.email, userId: candidate._id},
                      jwtSecret,
-                     {expiresIn: '48h'})
+                     {expiresIn: 60*100})
                  res.status(200).json({token})
              }else {
                  res.status(409).json({message: 'Password is false'})

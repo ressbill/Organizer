@@ -1,7 +1,8 @@
-<div class="card">
+<mat-spinner *ngIf="loading"></mat-spinner>
+<div class="card" *ngIf="!loading">
   <div class="grid-y grid-padding-y grid-padding-x mb2 mu1">
     <div class="cell text-center title mb2">{{title}}</div>
-    <form [formGroup]="form" class="form">
+    <form [formGroup]="form" class="form" (ngSubmit)="onSubmit()">
       <mat-form-field class="example-full-width ">
         <mat-label>Email:</mat-label>
         <input

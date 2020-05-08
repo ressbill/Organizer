@@ -11,6 +11,18 @@ import {ReactiveFormsModule} from "@angular/forms"
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import {MatInputModule} from '@angular/material/input'
 import {MatButtonModule} from '@angular/material/button'
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http"
+import {ErrorInterceptor} from "../shared/error-interceptor"
+import {ErrorComponent} from "../shared/error-component/error.component"
+import {MatDialogModule} from "@angular/material/dialog"
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { OverviewComponent } from './overview/overview.component';
+import { CostsComponent } from './wallet/costs/costs.component';
+import { IncomeComponent } from './wallet/income/income.component';
+import { TasksComponent } from './tasks/tasks.component';
+import { AnalyticsComponent } from './analytics/analytics.component';
+import { WalletComponent } from './wallet/wallet/wallet.component'
+import {TokenInterceptor} from "./authentication/token-interceptor"
 
 @NgModule({
   declarations: [
@@ -18,7 +30,14 @@ import {MatButtonModule} from '@angular/material/button'
     MainLayoutComponent,
     AuthComponent,
     AuthLayoutComponent,
-    LoginComponent
+    LoginComponent,
+    ErrorComponent,
+    OverviewComponent,
+    CostsComponent,
+    IncomeComponent,
+    TasksComponent,
+    AnalyticsComponent,
+    WalletComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,10 +45,17 @@ import {MatButtonModule} from '@angular/material/button'
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    HttpClientModule,
+    MatDialogModule,
+    MatProgressSpinnerModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [{
+    provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    ],
+  bootstrap: [AppComponent],
+  entryComponents: [ErrorComponent]
 })
 export class AppModule {
 }

@@ -1,4 +1,5 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core'
+import {AuthService} from "../../authentication/auth.service"
 
 @Component({
   selector: 'app-main-layout',
@@ -7,7 +8,9 @@ import {AfterViewInit, Component, OnInit} from '@angular/core'
 })
 export class MainLayoutComponent implements OnInit, AfterViewInit {
   title = 'Organizer'
-  constructor() { }
+
+  constructor(private auth: AuthService) {
+  }
 
   ngOnInit(): void {
   }
@@ -15,5 +18,9 @@ export class MainLayoutComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     $('.dropdown').foundation()
 
+  }
+
+  logout() {
+    this.auth.logout()
   }
 }

@@ -1,1 +1,45 @@
-<p>auth works!</p>
+<mat-spinner *ngIf="loading"></mat-spinner>
+<div class="card" *ngIf="!loading">
+  <div class="grid-y grid-padding-y grid-padding-x mb2 mu1">
+    <div class="cell text-center title mb2">{{title}}</div>
+    <form [formGroup]="form" class="form">
+      <mat-form-field class="example-full-width ">
+        <mat-label>Email:</mat-label>
+        <input
+          matInput formControlName="email"
+          class="custom-input"
+        >
+      </mat-form-field>
+      <span class="error-input " *ngIf="form.get('email').invalid && form.get('email').touched">
+                  <span *ngIf="form.get('email').errors['email']">Email address is incorrect!</span>
+                  <span *ngIf="form.get('email').errors['required']"> Email cannot be empty!</span>
+      </span>
+      <mat-form-field class="example-full-width mu2 ">
+        <mat-label>Password:</mat-label>
+        <input
+          matInput formControlName="password"
+          class="custom-input"
+        >
+      </mat-form-field>
+      <span class="error-input mb1" *ngIf="form.get('password').invalid && form.get('password').touched">
+                  <span
+                    *ngIf="form.get('password').errors['minlength']">
+                    Password must be at least 5 characters long!
+                    {{5 - form.get('password').errors['minlength']['actualLength']}} more characters
+                  </span>
+                  <span *ngIf="form.get('password').errors['required']"> Password cannot be empty!</span>
+      </span>
+      <div class="cell btn text-center mu2">
+        <button
+          color="accent"
+          mat-flat-button
+          [disabled]="form.invalid"
+          type="submit"
+          (click)="onSignUp()"
+        > Sign up
+        </button>
+
+      </div>
+    </form>
+  </div>
+</div>
