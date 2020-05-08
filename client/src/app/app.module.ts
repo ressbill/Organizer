@@ -15,14 +15,19 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http"
 import {ErrorInterceptor} from "../shared/error-interceptor"
 import {ErrorComponent} from "../shared/error-component/error.component"
 import {MatDialogModule} from "@angular/material/dialog"
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { OverviewComponent } from './overview/overview.component';
-import { CostsComponent } from './wallet/costs/costs.component';
-import { IncomeComponent } from './wallet/income/income.component';
-import { TasksComponent } from './tasks/tasks.component';
-import { AnalyticsComponent } from './analytics/analytics.component';
-import { WalletComponent } from './wallet/wallet/wallet.component'
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
+import {OverviewComponent} from './overview/overview.component'
+import {CostsComponent} from './wallet/costs/costs.component'
+import {IncomeComponent} from './wallet/income/income.component'
+import {TasksComponent} from './tasks/tasks.component'
+import {AnalyticsComponent} from './analytics/analytics.component'
+import {WalletComponent} from './wallet/wallet/wallet.component'
 import {TokenInterceptor} from "./authentication/token-interceptor"
+import {MatDatepickerModule} from '@angular/material/datepicker'
+import {MatIconModule} from "@angular/material/icon"
+import {MatNativeDateModule} from "@angular/material/core"
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { SideNavComponent } from './layouts/main-layout/side-nav/side-nav.component'
 
 @NgModule({
   declarations: [
@@ -38,6 +43,7 @@ import {TokenInterceptor} from "./authentication/token-interceptor"
     TasksComponent,
     AnalyticsComponent,
     WalletComponent,
+    SideNavComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,12 +54,17 @@ import {TokenInterceptor} from "./authentication/token-interceptor"
     MatButtonModule,
     HttpClientModule,
     MatDialogModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDatepickerModule,
+    MatIconModule,
+    MatNativeDateModule,
+    NgxMaterialTimepickerModule,
   ],
   providers: [{
-    provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
-    ],
+    provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true
+  },
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent],
   entryComponents: [ErrorComponent]
 })

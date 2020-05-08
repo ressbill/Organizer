@@ -35,13 +35,5 @@ export class TasksComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-
-      // @ts-ignore
-    $('#dpt').fdatepicker({
-        format: 'mm-dd-yyyy hh:ii',
-        disableDblClickSelection: true,
-        language: 'vi',
-        pickTime: true
-      });
 }
 }

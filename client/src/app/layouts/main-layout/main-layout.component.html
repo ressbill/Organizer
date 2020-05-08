@@ -1,24 +1,40 @@
 <div class="top-bar">
-  <div class="top-bar-left">
+  <div class="display-mobile">
+      <ul class="menu  flex-dir-row">
+        <li class="menu-text app-title">{{title}}</li>
+      </ul>
+      <ul class="menu">
+        <li ><a class="list-item-link"><span class="material-icons">list</span> </a></li>
+      </ul>
+
+
+  </div>
+
+
+  <div class="top-bar-left hide-mobile">
     <ul class="dropdown menu flex-dir-row align-middle" data-dropdown-menu>
       <li class="menu-text app-title">{{title}}</li>
+
       <li>
-        <a routerLink="/wallet" routerLinkActive="active-link" >Wallet</a>
+        <a routerLink="/wallet" routerLinkActive="active-link">Wallet</a>
         <ul class="menu vertical">
           <li><a routerLink="/wallet/costs" routerLinkActive="active-link" class=" costs">Costs</a></li>
-          <li ><a routerLink="/wallet/income" routerLinkActive="active-link" class="income">Income</a></li>
+          <li><a routerLink="/wallet/income" routerLinkActive="active-link" class="income">Income</a></li>
         </ul>
       </li>
-      <li ><a routerLink="/tasks" routerLinkActive="active-link" class="tasks list-item-link">Tasks</a></li>
-      <li ><a routerLink="/analytics" routerLinkActive="active-link" class="analytics list-item-link">Analytics </a></li>
+      <li><a routerLink="/tasks" routerLinkActive="active-link" class="tasks list-item-link">Tasks</a></li>
+      <li><a routerLink="/analytics" routerLinkActive="active-link" class="analytics list-item-link">Analytics </a>
+      </li>
+
     </ul>
 
   </div>
   <div class="spacer"></div>
-  <div class="top-bar-right">
+  <div class="top-bar-right hide-mobile">
     <ul class="menu">
-    <li (click)="logout()"><a href="#" class="list-item-link">Logout </a></li>
+      <li (click)="logout()"><a  class="list-item-link">Logout </a></li>
     </ul>
-    </div>
+  </div>
 </div>
+<app-side-nav></app-side-nav>
 <router-outlet></router-outlet>

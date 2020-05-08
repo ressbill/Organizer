@@ -9,7 +9,6 @@ import {AppModule} from './app/app.module'
 // //TODO remove this lines for build if possible.
  import * as $ from 'jquery';
  import 'foundation-sites/dist/js/foundation'
- import './foundation-datepicker'
   $(document).foundation();
 // //
 

@@ -48,3 +48,23 @@
 .active-link{
   color: $secondary;
 }
+.hide-mobile{
+  @media only screen and (max-width: 680px) {
+    display: none;
+  }
+}
+.display-mobile{
+  display: none;
+  @media only screen and (max-width: 680px) {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+.example-sidenav{
+  position: absolute;
+  left: 0;
+  top: 3rem;
+  z-index: 10;
+  height: 100vh;
+}
