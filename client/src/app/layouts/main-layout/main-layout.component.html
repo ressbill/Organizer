@@ -4,7 +4,7 @@
         <li class="menu-text app-title">{{title}}</li>
       </ul>
       <ul class="menu">
-        <li ><a class="list-item-link"><span class="material-icons">list</span> </a></li>
+        <li (click)="openSideNav()"><a class="list-item-link"><span class="material-icons">list</span> </a></li>
       </ul>
 
 
@@ -22,7 +22,7 @@
           <li><a routerLink="/wallet/income" routerLinkActive="active-link" class="income">Income</a></li>
         </ul>
       </li>
-      <li><a routerLink="/tasks" routerLinkActive="active-link" class="tasks list-item-link">Tasks</a></li>
+      <li><a routerLink="/tasks" routerLinkActive="active-link" class="tasks list-item-link" #test>Tasks</a></li>
       <li><a routerLink="/analytics" routerLinkActive="active-link" class="analytics list-item-link">Analytics </a>
       </li>
 
@@ -36,5 +36,6 @@
     </ul>
   </div>
 </div>
-<app-side-nav></app-side-nav>
+
+<app-side-nav [visible]="sideNav"></app-side-nav>
 <router-outlet></router-outlet>

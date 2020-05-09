@@ -1,3 +1,39 @@
-<div class="side-nav" [@create] = "navState">Hi</div>
-<hr>
-<button class="button" (click)="animate()">Animate</button>
+<div class="side-nav" [@create]="navState" *ngIf="visible">
+
+  <ul class="dropdown menu nav" data-dropdown-menu #parent>
+    <li class="wallet"><a routerLink="/wallet" routerLinkActive="active-link" class="align-icons">
+      <span class="material-icons">
+      account_balance_wallet
+      </span>
+      Wallet</a>
+      <ul class=" right-side nav ">
+        <li><a routerLink="/wallet/costs" routerLinkActive="active-link" class="align-icons ">
+          <span class="material-icons">
+          trending_down
+          </span>
+          Costs</a>
+        </li>
+        <li><a routerLink="/wallet/income" routerLinkActive="active-link" class="align-icons">
+          <span class="material-icons">
+            trending_up
+          </span>
+          Income</a>
+        </li>
+      </ul>
+    </li>
+    <li><a routerLink="/tasks" routerLinkActive="active-link" class="align-icons"> <span class="material-icons">
+schedule
+</span>Tasks</a></li>
+    <li><a routerLink="/analytics" routerLinkActive="active-link" class=" align-icons"><span
+      class="material-icons">
+timeline
+</span>Analytics </a>
+    </li>
+    <li class="logout"><a  class="list-item-link" (click)="logout()">Logout </a></li>
+
+  </ul>
+
+
+</div>
+
+

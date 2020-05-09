@@ -8,6 +8,9 @@ import {AuthService} from "../../authentication/auth.service"
 })
 export class MainLayoutComponent implements OnInit, AfterViewInit {
   title = 'Organizer'
+  sideNav = false
+  opening = false
+
   constructor(private auth: AuthService) {
   }
 
@@ -16,15 +19,13 @@ export class MainLayoutComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     $('.dropdown').foundation()
-    const el = $('.dropdown-pane')
-    const elem = new Foundation.Dropdown(el, {});
   }
 
   logout() {
     this.auth.logout()
   }
 
-  dropDown() {
-    $('.dropdown-pane').foundation('open');
+  openSideNav() {
+    this.sideNav = !this.sideNav
   }
 }

@@ -28,6 +28,8 @@ import {MatIconModule} from "@angular/material/icon"
 import {MatNativeDateModule} from "@angular/material/core"
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { SideNavComponent } from './layouts/main-layout/side-nav/side-nav.component'
+import {MatMenuModule} from "@angular/material/menu"
+
 
 @NgModule({
   declarations: [
@@ -59,6 +61,7 @@ import { SideNavComponent } from './layouts/main-layout/side-nav/side-nav.compon
     MatIconModule,
     MatNativeDateModule,
     NgxMaterialTimepickerModule,
+    MatMenuModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true
