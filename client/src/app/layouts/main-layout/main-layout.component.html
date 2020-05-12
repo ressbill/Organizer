@@ -13,7 +13,7 @@
 
   <div class="top-bar-left hide-mobile">
     <ul class="dropdown menu flex-dir-row align-middle" data-dropdown-menu>
-      <li class="menu-text app-title">{{title}}</li>
+      <li class="menu-text app-title removeM">{{title}}</li>
 
       <li>
         <a routerLink="/wallet" routerLinkActive="active-link">Wallet</a>
@@ -24,6 +24,10 @@
       </li>
       <li><a routerLink="/tasks" routerLinkActive="active-link" class="tasks list-item-link" #test>Tasks</a></li>
       <li><a routerLink="/analytics" routerLinkActive="active-link" class="analytics list-item-link">Analytics </a>
+      </li>
+      <li><a routerLink="/overview" routerLinkActive="active-link" class="overview list-item-link">Home <span class="material-icons home-icon">
+home
+</span> </a>
       </li>
 
     </ul>

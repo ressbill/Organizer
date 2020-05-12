@@ -1,19 +1,19 @@
-<form [formGroup]="form" class="form">
+<form [formGroup]="form" class="form " (ngSubmit)="createPost()">
   <div class="grid">
     <mat-form-field color="accent" class="title">
       <mat-label>Title</mat-label>
-      <input matInput>
+      <input matInput  formControlName="name" (focus)="setNameValidators()">
     </mat-form-field>
 
     <mat-form-field appearance="outline" color="accent" class="title">
       <mat-label>Some notes</mat-label>
-      <textarea matInput placeholder="Description..."></textarea>
+      <textarea matInput placeholder="Description..." formControlName="text"></textarea>
     </mat-form-field>
 
     <div class="calendar">
       <mat-form-field class="example-full-width" color="accent">
         <mat-label>Choose a date</mat-label>
-        <input matInput [matDatepicker]="picker">
+        <input matInput [matDatepicker]="picker" formControlName="date">
         <mat-datepicker-toggle matSuffix [for]="picker">
 
         </mat-datepicker-toggle>
@@ -21,19 +21,45 @@
       </mat-form-field>
       <div class=" time">
         <div class="24hr-example">
-          <input placeholder="time" aria-label="24hr format" [ngxTimepicker]="fullTime" [format]="24">
+          <input placeholder="choose time" aria-label="24hr format" [ngxTimepicker]="fullTime" [format]="24" formControlName="time">
           <ngx-material-timepicker #fullTime></ngx-material-timepicker>
         </div>
       </div>
 
     </div>
   </div>
-  <button mat-raised-button color="accent" type="submit"> Save</button>
+  <button mat-raised-button class="save-button" color="accent" type="submit" [disabled] = "form.invalid || sending" > Save</button>
 
 </form>
-<div *ngFor="let task of tasks">
-  <h1>{{task.name}}</h1>
-  <p>{{task.text}}</p>
-  <p>{{task.date}}</p>
+
+
+<hr class="mt4">
+
+<mat-spinner *ngIf="isLoading" color="accent" class="loader">
+</mat-spinner>
+
+
+<div *ngIf="!isLoading">
+<div *ngIf="tasks.length !== 0; else empty">
+  <div class="tasks">
+<mat-card *ngFor="let task of tasks">
+  <mat-card-title>{{task.name}}</mat-card-title>
+  <mat-card-content >{{task.text || ' '}}</mat-card-content>
+  <mat-card-content >{{task.date | date: 'MMM d, y, h:mm a'}}</mat-card-content >
+</mat-card>
 </div>
+  <div class = "load-more-btn" *ngIf="!emptyResponse">
+    <button (click)="loadMore()"  mat-mini-fab color="accent" >
+      More
+    </button>
+  </div>
+
+</div>
+
+<ng-template #empty>
+ <p class="centered"> No tasks</p>
+</ng-template>
+</div>
+<mat-spinner *ngIf="smallLoading" color="accent" class="loader">
+</mat-spinner>
 

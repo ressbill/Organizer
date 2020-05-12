@@ -46,6 +46,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+    this.form.disable()
     this.loading = true
     this.authService.login(this.form.value).subscribe(response=>{
       this.router.navigate(['/overview'])

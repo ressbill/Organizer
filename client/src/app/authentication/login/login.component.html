@@ -33,7 +33,7 @@
         <button
           color="accent"
           mat-flat-button
-          [disabled]="form.invalid"
+          [disabled]="form.invalid || form.disabled"
           type="submit"
         > Enter your organizer
         </button>

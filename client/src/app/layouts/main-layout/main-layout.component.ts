@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core'
+import {AfterViewInit, Component, HostListener, OnInit} from '@angular/core'
 import {AuthService} from "../../authentication/auth.service"
 
 @Component({
@@ -10,7 +10,6 @@ export class MainLayoutComponent implements OnInit, AfterViewInit {
   title = 'Organizer'
   sideNav = false
   opening = false
-
   constructor(private auth: AuthService) {
   }
 

@@ -1,4 +1,14 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core'
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core'
 import {animate, state, style, transition, trigger} from "@angular/animations"
 import {AuthService} from "../../../authentication/auth.service"
 
@@ -11,7 +21,7 @@ import {AuthService} from "../../../authentication/auth.service"
     trigger('create', [
       state('start', style(
         {
-          height: '94vh'
+          height: '100vh'
         }
       )),
       state('end', style(
@@ -24,7 +34,7 @@ import {AuthService} from "../../../authentication/auth.service"
           opacity: 0,
         }),
         animate(300, style({
-          height: '94vh',
+          height: '100vh',
           opacity: 0.8,
           background:'#9e9e9e'
         }))
@@ -32,7 +42,7 @@ import {AuthService} from "../../../authentication/auth.service"
       transition(':leave', [
         style({
           opacity: 0.8,
-          height: '94vh'
+          height: '100vh'
         }),
         animate(300, style({
           opacity: 0,
@@ -45,8 +55,8 @@ import {AuthService} from "../../../authentication/auth.service"
 })
 export class SideNavComponent implements OnInit, AfterViewInit {
   navState = 'start'
-  //visible = false
   @Input() visible
+
   @ViewChild('parent') navBar: ElementRef
   constructor(private auth:AuthService) {
   }
@@ -54,9 +64,6 @@ export class SideNavComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
   }
 
-  animate() {
-    this.navState = this.navState === 'end' ? 'start' : 'end'
-  }
   ngAfterViewInit(): void {
   }
 

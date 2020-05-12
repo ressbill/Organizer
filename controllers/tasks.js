@@ -43,7 +43,7 @@ exports.getAllTasks = async (req, res, next) => {
         }
     }
     try {
-        const tasks = await Task.find(query)
+        const tasks = await Task.find(query,'_id name text date')
             .sort({date: 1})
             .skip(+req.query.offset)
             .limit(+req.query.limit)
@@ -81,7 +81,7 @@ exports.create = async (req, res, next) => {
         const createdTask = await Task.create(task)
         res.status(201).json(createdTask)
     } catch (e) {
-        if(e.errors.name.kind === 'unique'){
+        if (e.errors.name.kind === 'unique' || e.errors.name.kind ) {
             e.message = "Name of the task must be unique"
             e.status = 409
             return next(e)

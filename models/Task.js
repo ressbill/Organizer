@@ -8,8 +8,7 @@ const tasksSchema = new Schema({
         unique: true
     },
     text: {
-        type: String,
-        required: true,
+        type: String
     },
     date: {
         type: Date,

@@ -1,6 +1,7 @@
 <div class="side-nav" [@create]="navState" *ngIf="visible">
 
   <ul class="dropdown menu nav" data-dropdown-menu #parent>
+    <li class="menu-text app-title">Organizer</li>
     <li class="wallet"><a routerLink="/wallet" routerLinkActive="active-link" class="align-icons">
       <span class="material-icons">
       account_balance_wallet
@@ -21,7 +22,7 @@
         </li>
       </ul>
     </li>
-    <li><a routerLink="/tasks" routerLinkActive="active-link" class="align-icons"> <span class="material-icons">
+    <li><a routerLink="/tasks" routerLinkActive="active-link" class="align-icons"> <span class="material-icons tt1">
 schedule
 </span>Tasks</a></li>
     <li><a routerLink="/analytics" routerLinkActive="active-link" class=" align-icons"><span
@@ -29,7 +30,12 @@ schedule
 timeline
 </span>Analytics </a>
     </li>
-    <li class="logout"><a  class="list-item-link" (click)="logout()">Logout </a></li>
+    <li><a routerLink="/overview" routerLinkActive="active-link" class=" align-icons">
+      <span class="material-icons  tt1">
+home
+</span>Home  </a>
+    </li>
+    <li class="logout"><a class="list-item-link" (click)="logout()">Logout </a></li>
 
   </ul>
 

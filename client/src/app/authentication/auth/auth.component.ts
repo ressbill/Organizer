@@ -31,8 +31,6 @@ export class AuthComponent implements OnInit, OnDestroy {
     this.authSub = this.authService.register(this.form.value).subscribe((response) => {
         this.loading = false
         this.form.enable()
-        console.log(response)
-
         this.router.navigate(['login'], {
           queryParams: {
             registered: true,

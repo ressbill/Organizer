@@ -29,6 +29,7 @@ import {MatNativeDateModule} from "@angular/material/core"
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { SideNavComponent } from './layouts/main-layout/side-nav/side-nav.component'
 import {MatMenuModule} from "@angular/material/menu"
+import {MatCardModule} from "@angular/material/card"
 
 
 @NgModule({
@@ -62,6 +63,7 @@ import {MatMenuModule} from "@angular/material/menu"
     MatNativeDateModule,
     NgxMaterialTimepickerModule,
     MatMenuModule,
+    MatCardModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true

@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core"
-import {HttpClient} from "@angular/common/http"
+import {HttpClient, HttpParams} from "@angular/common/http"
 import {Observable} from "rxjs"
 import {Task} from "../../shared/interfaces"
 
@@ -8,8 +8,12 @@ export class TasksService {
   constructor(private http: HttpClient) {
   }
 
-  fetch(): Observable<Task[]> {
-    return this.http.get<Task[]>('/api/organizer/tasks')
+  fetch(params: any = {}): Observable<Task[]| Task> {
+    return this.http.get<Task[]>('/api/organizer/tasks', {
+      params: new HttpParams({
+        fromObject: params
+      })
+    })
   }
 
   create(task: Task): Observable<Task> {
