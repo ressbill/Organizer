@@ -43,7 +43,7 @@ exports.getAllTasks = async (req, res, next) => {
         }
     }
     try {
-        const tasks = await Task.find(query,'_id name text date')
+        const tasks = await Task.find(query, '_id name text date')
             .sort({date: 1})
             .skip(+req.query.offset)
             .limit(+req.query.limit)
@@ -75,17 +75,29 @@ exports.create = async (req, res, next) => {
         // if (isoDate === null) {
         //     return res.status(406).json({message: 'Date is wrong'})
         // }
-
+        try{
+            const repeatedTask = await Task.findOne({$and: [{date: req.body.date}, {name: req.body.name}]})
+            if (repeatedTask) {
+                console.log('inside')
+                return res.status(409).json({message: 'Task credentials must be unique'})
+            }
+        } catch (e) {
+            e.status = 409
+            e.message = 'Task credentials must be unique'
+            return next(e)
+        }
+        console.log('here')
         const isoDate = moment(req.body.date).toISOString()
         task.date = isoDate
         const createdTask = await Task.create(task)
         res.status(201).json(createdTask)
     } catch (e) {
-        if (e.errors.name.kind === 'unique' || e.errors.name.kind ) {
-            e.message = "Name of the task must be unique"
-            e.status = 409
-            return next(e)
-        }
+        // if (e.errors.name.kind === 'unique' || e.errors.name.kind ) {
+        //     e.message = "Name of the task must be unique"
+        //     e.status = 409
+        //     return next(e)
+        // }
+        console.log(e)
         next(e)
     }
 }

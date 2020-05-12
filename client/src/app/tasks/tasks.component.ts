@@ -1,8 +1,10 @@
-import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core'
-import {Task} from "../../shared/interfaces"
+import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core'
+import {Filter, Task} from "../../shared/interfaces"
 import {TasksService} from "./tasks.service"
 import {Subscription} from "rxjs"
 import {FormControl, FormGroup, Validators} from "@angular/forms"
+import {MatCheckbox} from "@angular/material/checkbox"
+import {MatDatepicker} from "@angular/material/datepicker"
 
 @Component({
   selector: 'app-tasks',
@@ -10,6 +12,9 @@ import {FormControl, FormGroup, Validators} from "@angular/forms"
   styleUrls: ['./tasks.component.scss']
 })
 export class TasksComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild('singleDate') singleDate: ElementRef
+  @ViewChild('history') historyRef: MatCheckbox
+  @ViewChild('singlePicker') pickerRef: MatDatepicker<any>
   tasks: Task[] = []
   sub: Subscription
   form: FormGroup
@@ -20,11 +25,13 @@ export class TasksComponent implements OnInit, OnDestroy, AfterViewInit {
   limit = 5
   offset = 0
   step = 2
+  chosenDate: any
 
   constructor(private tasksService: TasksService) {
   }
 
   ngOnInit(): void {
+
     this.form = new FormGroup({
       name: new FormControl(null, [Validators.required, Validators.minLength(3)]),
       text: new FormControl(null),
@@ -43,11 +50,13 @@ export class TasksComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+
   }
 
   //Resetting all controls except date. Sending task to a server.
   // After creation fetch data from server
   createPost() {
+    this.clearFilter()
     this.emptyResponse = false
     this.sending = true
     this.isLoading = true
@@ -85,17 +94,54 @@ export class TasksComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   loadMore() {
+    const filter: Filter = {}
+    if (this.historyRef.checked === true) {
+      filter.previous = 'true'
+    }
+    const selectedDate = this.singleDate.nativeElement.value
+    if(selectedDate) {
+      filter.date = selectedDate
+    }
     this.limit = this.step
-    this.fetch()
+    this.fetch(filter)
     this.smallLoading = true
   }
 
-  private fetch() {
+  clearFilter() {
+    this.historyRef.checked = false
+    this.chosenDate = null
+    this.singleDate.nativeElement.value = null
+    this.pickerRef._selected = null
+  }
+
+  applyFilter() {
+    this.isLoading = true
+    this.tasks = []
+    this.offset = 0
+    this.chosenDate = this.singleDate.nativeElement.value
+    const filter: Filter = {}
+    if (this.historyRef.checked === true) {
+      filter.previous = 'true'
+    }
+    const selectedDate = this.singleDate.nativeElement.value
+    if(selectedDate) {
+      filter.date = selectedDate
+    }
+    filter.limit = 5;
+    this.fetch(filter)
+
+  }
+
+  private fetch(filter: Filter = {}) {
     const params = {
       offset: this.offset,
-      limit: this.limit
+      limit: this.limit,
+
     }
-    this.sub = this.tasksService.fetch(params).subscribe((response: Task[]) => {
+    const concatFilter = {...params, ...filter}
+    console.log(concatFilter)
+    this.sub = this.tasksService.fetch(concatFilter).subscribe((response: Task[]) => {
+      console.log(response)
       if (response.length < this.step) {
         this.emptyResponse = true
       }
@@ -105,4 +151,5 @@ export class TasksComponent implements OnInit, OnDestroy, AfterViewInit {
       this.tasks = this.tasks.concat(response)
     })
   }
+
 }

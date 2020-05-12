@@ -8,3 +8,8 @@ export interface Task{
   date?: Date
   id?: number
 }
+export interface Filter{
+  date?: Date
+  previous?: string
+  limit?: number
+}

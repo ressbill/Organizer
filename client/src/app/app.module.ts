@@ -30,6 +30,8 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { SideNavComponent } from './layouts/main-layout/side-nav/side-nav.component'
 import {MatMenuModule} from "@angular/material/menu"
 import {MatCardModule} from "@angular/material/card"
+import {MatCheckboxModule} from "@angular/material/checkbox"
+import {MatTooltipModule} from "@angular/material/tooltip"
 
 
 @NgModule({
@@ -64,6 +66,8 @@ import {MatCardModule} from "@angular/material/card"
     NgxMaterialTimepickerModule,
     MatMenuModule,
     MatCardModule,
+    MatCheckboxModule,
+    MatTooltipModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true

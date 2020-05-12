@@ -102,3 +102,50 @@ mat-card-title{
   //  right: 10vw;
   //}
 }
+.filter{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 58%;
+  margin: 1rem auto;
+  @media only screen and (max-width: 940px) {
+    width: 70%;
+  }
+  @media only screen and (max-width: 760px) {
+    width: 80%;
+  }
+  @media only screen and (max-width: 660px) {
+    width: 90%;
+  }
+  @media only screen and (max-width: 540px) {
+    width: 98%;
+  }
+
+}
+.hide-input{
+ visibility: hidden;
+  height: 0;
+  position: absolute;
+  transform: translateY(1rem) translateX(-50%);
+
+}
+.calendar-input{
+  position: absolute;
+  left: 50%;
+}
+.single-date-calendar{
+  @media only screen and (max-width: 660px) {
+  }
+}
+.history{
+  @media only screen and (max-width: 680px) {
+  }
+}
+.selected-date{
+  display: flex;
+  flex: 1 1 0;
+  justify-content: center;
+  @media only screen and (max-width: 480px) {
+    padding-left: 0.4rem;
+  }
+}

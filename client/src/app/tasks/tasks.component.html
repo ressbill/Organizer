@@ -38,8 +38,33 @@
 <mat-spinner *ngIf="isLoading" color="accent" class="loader">
 </mat-spinner>
 
+<div class="filter">
+  <div class="single-date-calendar">
+    <mat-form-field class="example-full-width hide-input" >
+      <input matInput [matDatepicker]="singlePicker" placeholder="Choose a date" class="calendar-input" #singleDate>
+      <mat-datepicker #singlePicker color="accent"></mat-datepicker>
+    </mat-form-field>
+    <button mat-raised-button (click)="singlePicker.open()" matTooltip="Select date">Datepicker</button>
+  </div>
+
+  <div class="selected-date">
+    <div>
+      <span *ngIf="chosenDate">Tasks on </span>{{chosenDate}}
+    </div>
+
+  </div>
+  <mat-checkbox class="history" #history
+                matTooltip="Show previous tasks">History</mat-checkbox>
+  <div class="apply-reset">
+    <button  [disabled] = "isLoading" mat-button color="accent" (click)="applyFilter()"
+            matTooltip="Apply filter and refresh" > Apply filter</button>
+    <button mat-button color="warn" (click)="clearFilter()"
+            matTooltip="Reset filter and refresh" >Clear filter</button>
+  </div>
+</div>
 
 <div *ngIf="!isLoading">
+
 <div *ngIf="tasks.length !== 0; else empty">
   <div class="tasks">
 <mat-card *ngFor="let task of tasks">
