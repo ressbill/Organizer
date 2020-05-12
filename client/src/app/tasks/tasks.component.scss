@@ -60,6 +60,15 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  @media only screen and (max-width: 1200px) {
+    width: 70%;
+  }
+  @media only screen and (max-width: 900px) {
+    width: 80%;
+  }
+  @media only screen and (max-width: 600px) {
+    width: 90%;
+  }
   //& > * {
   //  width: 200px;
   //  color: #0a0a0a;
@@ -75,17 +84,33 @@ mat-card {
   &:not(:last-child) {
     margin-bottom: 1rem;
   }
+  &:last-child{
+    margin-bottom: 0.7rem;
+  }
+}
+.griddy{
 
   display: grid;
-  grid-template-columns: 40% 40% 20%;
+  grid-column-gap: 0.5rem;
+  grid-template-columns: 30% 40% 22% 8%;
   align-items: center;
 
   & > * {
-      margin: 0;
+    margin: 0;
   }
 }
 mat-card-title{
   font-size: 120%;
+  @media only screen and (max-width: 800px) {
+    font-size:100%;
+  }
+
+  overflow-wrap: normal;
+  word-wrap: normal;
+  word-break: break-all;
+  line-break: auto;
+  hyphens: auto;
+
 }
 .load-more-btn{
   position: relative;
@@ -148,4 +173,43 @@ mat-card-title{
   @media only screen and (max-width: 480px) {
     padding-left: 0.4rem;
   }
+}
+.deletebtn{
+  position: absolute;
+  top: 3px;
+  right: 5px;
+  @media only screen and (max-width: 1600px) {
+    top: 0px;
+    right: 0px;
+  }
+  span{
+    font-size: 1.1rem;
+    color: #ef5350;
+    &:hover{
+      cursor: pointer;
+    }
+  }
+  mat-icon{
+    font-size: 0.85rem;
+  }
+}
+.mat-card-content {
+  @media only screen and (max-width: 800px) {
+    font-size: 0.8rem;
+  }
+  hyphens: auto;
+  overflow-wrap: normal;
+  word-wrap: normal;
+  word-break: break-all;
+  line-break: auto;
+}
+.edit{
+  @media only screen and (max-width: 800px) {
+    font-size: 1.2rem;
+    transform: translateX(-1rem);
+  }
+}
+.chosen-date{
+  font-weight: 500;
+  color: #03a9f4;
 }

@@ -1,10 +1,12 @@
 import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core'
-import {Filter, Task} from "../../shared/interfaces"
+import {Filter, Message, Task} from "../../shared/interfaces"
 import {TasksService} from "./tasks.service"
 import {Subscription} from "rxjs"
 import {FormControl, FormGroup, Validators} from "@angular/forms"
 import {MatCheckbox} from "@angular/material/checkbox"
 import {MatDatepicker} from "@angular/material/datepicker"
+import {WindowRef} from "../../shared/windowref.service"
+import {MatSnackBar} from "@angular/material/snack-bar"
 
 @Component({
   selector: 'app-tasks',
@@ -26,8 +28,9 @@ export class TasksComponent implements OnInit, OnDestroy, AfterViewInit {
   offset = 0
   step = 2
   chosenDate: any
+  filterApplied = false
 
-  constructor(private tasksService: TasksService) {
+  constructor(private tasksService: TasksService, public windowRef: WindowRef, private _snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -50,7 +53,7 @@ export class TasksComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-
+    console.log(window)
   }
 
   //Resetting all controls except date. Sending task to a server.
@@ -75,6 +78,11 @@ export class TasksComponent implements OnInit, OnDestroy, AfterViewInit {
     this.form.reset()
     this.form.get('date').setValue(task.date)
     this.tasksService.create(task).subscribe((response) => {
+        this._snackBar.open('Post created successfully', 'Ok!', {
+          duration: 2000,
+          verticalPosition: 'top',
+          horizontalPosition: 'right'
+        })
         this.tasks = []
         this.offset = 0
         this.limit = 5
@@ -95,19 +103,26 @@ export class TasksComponent implements OnInit, OnDestroy, AfterViewInit {
 
   loadMore() {
     const filter: Filter = {}
-    if (this.historyRef.checked === true) {
-      filter.previous = 'true'
+    if (this.filterApplied) {
+      if (this.historyRef.checked === true) {
+        filter.previous = 'true'
+      }
+      const selectedDate = this.singleDate.nativeElement.value
+      if (selectedDate) {
+        filter.date = selectedDate
+      }
+      this.limit = this.step
+      this.smallLoading = true
+      return this.fetch(filter)
     }
-    const selectedDate = this.singleDate.nativeElement.value
-    if(selectedDate) {
-      filter.date = selectedDate
-    }
+
     this.limit = this.step
-    this.fetch(filter)
+    this.fetch()
     this.smallLoading = true
   }
 
   clearFilter() {
+    this.filterApplied = false
     this.historyRef.checked = false
     this.chosenDate = null
     this.singleDate.nativeElement.value = null
@@ -115,24 +130,44 @@ export class TasksComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   applyFilter() {
+    this.filterApplied = true
     this.isLoading = true
     this.tasks = []
     this.offset = 0
+
     this.chosenDate = this.singleDate.nativeElement.value
     const filter: Filter = {}
     if (this.historyRef.checked === true) {
       filter.previous = 'true'
     }
     const selectedDate = this.singleDate.nativeElement.value
-    if(selectedDate) {
+    if (selectedDate) {
       filter.date = selectedDate
     }
-    filter.limit = 5;
+    this.limit = 5
+    filter.limit = 5
     this.fetch(filter)
 
   }
 
+  onDeleteTask(task: Task) {
+    this.isLoading = true
+    this.tasksService.delete(task).subscribe((response: Message) => {
+      const taskIndex = this.tasks.findIndex(t => t._id = task._id)
+      this.tasks.splice(taskIndex, 1)
+      this.isLoading = false
+      this._snackBar.open(response.message, 'Ok!', {
+        duration: 2000,
+      })
+    })
+  }
+
+  onEditTask(task: Task) {
+    this.tasksService.edit(task)
+  }
+
   private fetch(filter: Filter = {}) {
+    this.emptyResponse = false
     const params = {
       offset: this.offset,
       limit: this.limit,
@@ -142,7 +177,7 @@ export class TasksComponent implements OnInit, OnDestroy, AfterViewInit {
     console.log(concatFilter)
     this.sub = this.tasksService.fetch(concatFilter).subscribe((response: Task[]) => {
       console.log(response)
-      if (response.length < this.step) {
+      if (response.length < this.limit) {
         this.emptyResponse = true
       }
       this.offset += this.limit
@@ -151,5 +186,4 @@ export class TasksComponent implements OnInit, OnDestroy, AfterViewInit {
       this.tasks = this.tasks.concat(response)
     })
   }
-
 }

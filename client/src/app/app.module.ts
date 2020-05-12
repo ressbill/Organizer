@@ -32,6 +32,7 @@ import {MatMenuModule} from "@angular/material/menu"
 import {MatCardModule} from "@angular/material/card"
 import {MatCheckboxModule} from "@angular/material/checkbox"
 import {MatTooltipModule} from "@angular/material/tooltip"
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -68,11 +69,13 @@ import {MatTooltipModule} from "@angular/material/tooltip"
     MatCardModule,
     MatCheckboxModule,
     MatTooltipModule,
+    MatSnackBarModule
+
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true
   },
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],
   bootstrap: [AppComponent],
   entryComponents: [ErrorComponent]
