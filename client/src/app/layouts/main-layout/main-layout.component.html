@@ -1,3 +1,33 @@
+<!--<mat-toolbar >-->
+<!--  <mat-toolbar-row>-->
+<!--    <span> {{title}}</span>-->
+<!--    <ul class="menu-list">-->
+<!--      <li>-->
+<!--        <mat-menu #appMenu="matMenu">-->
+<!--          <a routerLink="/wallet/costs" routerLinkActive="active-link" mat-menu-item>Costs</a>-->
+<!--          <a routerLink="/wallet/income" routerLinkActive="active-link" mat-menu-item>Income</a>-->
+<!--        </mat-menu>-->
+<!--        <a mat-icon-button [matMenuTriggerFor]="appMenu">-->
+<!--          Wallet-->
+<!--          <mat-icon>more_vert</mat-icon>-->
+<!--        </a>-->
+<!--      </li>-->
+<!--      <li><a routerLink="/tasks" routerLinkActive="active-link" class="tasks list-item-link" #test>Tasks</a></li>-->
+<!--      <li><a routerLink="/analytics" routerLinkActive="active-link" class="analytics list-item-link">Analytics </a>-->
+<!--      </li>-->
+<!--      <li><a routerLink="/overview" routerLinkActive="active-link" class="overview list-item-link">Home-->
+<!--        <span class="material-icons home-icon">-->
+<!--          home-->
+<!--      </span>-->
+<!--      </a>-->
+<!--      </li>-->
+<!--      <li class="spacer">&nbsp;</li>-->
+<!--      <li (click)="logout()"><a  class="list-item-link">Logout </a></li>-->
+<!--    </ul>-->
+<!--  </mat-toolbar-row>-->
+
+<!--</mat-toolbar>-->
+
 <div class="top-bar">
   <div class="display-mobile">
       <ul class="menu  flex-dir-row">
@@ -13,21 +43,25 @@
 
   <div class="top-bar-left hide-mobile">
     <ul class="dropdown menu flex-dir-row align-middle" data-dropdown-menu>
-      <li class="menu-text app-title removeM">{{title}}</li>
-
+      <li class="menu-text app-title ">{{title}}</li>
       <li>
-        <a routerLink="/wallet" routerLinkActive="active-link">Wallet</a>
-        <ul class="menu vertical">
-          <li><a routerLink="/wallet/costs" routerLinkActive="active-link" class=" costs">Costs</a></li>
-          <li><a routerLink="/wallet/income" routerLinkActive="active-link" class="income">Income</a></li>
-        </ul>
+        <mat-menu #appMenu="matMenu">
+        <a routerLink="/wallet/costs" routerLinkActive="active-link" mat-menu-item>Costs</a>
+        <a routerLink="/wallet/income" routerLinkActive="active-link" mat-menu-item>Income</a>
+      </mat-menu>
+        <a mat-icon-button [matMenuTriggerFor]="appMenu">
+          Wallet
+          <mat-icon>more_vert</mat-icon>
+        </a>
       </li>
       <li><a routerLink="/tasks" routerLinkActive="active-link" class="tasks list-item-link" #test>Tasks</a></li>
       <li><a routerLink="/analytics" routerLinkActive="active-link" class="analytics list-item-link">Analytics </a>
       </li>
-      <li><a routerLink="/overview" routerLinkActive="active-link" class="overview list-item-link">Home <span class="material-icons home-icon">
-home
-</span> </a>
+      <li><a routerLink="/overview" routerLinkActive="active-link" class="overview list-item-link">Home
+        <span class="material-icons home-icon">
+          home
+      </span>
+      </a>
       </li>
 
     </ul>

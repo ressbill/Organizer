@@ -94,6 +94,9 @@ mat-card {
   grid-column-gap: 0.5rem;
   grid-template-columns: 30% 40% 22% 8%;
   align-items: center;
+  @media only screen and (max-width: 850px) {
+    grid-template-columns: 30% 30% 15% 25%;
+  }
 
   & > * {
     margin: 0;
@@ -163,8 +166,9 @@ mat-card-title{
   }
 }
 .history{
-  @media only screen and (max-width: 680px) {
-  }
+  @media only screen and (max-width: 400px) {
+    padding-left: 1rem;
+}
 }
 .selected-date{
   display: flex;
@@ -203,13 +207,32 @@ mat-card-title{
   word-break: break-all;
   line-break: auto;
 }
-.edit{
-  @media only screen and (max-width: 800px) {
-    font-size: 1.2rem;
-    transform: translateX(-1rem);
-  }
-}
+
 .chosen-date{
   font-weight: 500;
   color: #03a9f4;
+}
+.date{
+  hyphens: auto;
+  overflow-wrap: normal;
+  word-wrap: normal;
+  word-break: break-all;
+  line-break: auto;
+}
+.edit-btn{
+  @media only screen and (max-width: 1500px) {
+    transform: translateX(-1rem);
+  }
+  @media only screen and (max-width: 800px) {
+    transform: translateX(1.3rem);
+  }
+  @media only screen and (max-width: 600px) {
+    transform: translateX(2rem);
+  }
+  @media only screen and (max-width: 400px) {
+    transform: translateX(0rem);
+  }
+}
+.date-picker{
+  text-align: center;
 }

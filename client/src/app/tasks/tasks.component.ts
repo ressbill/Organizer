@@ -7,6 +7,8 @@ import {MatCheckbox} from "@angular/material/checkbox"
 import {MatDatepicker} from "@angular/material/datepicker"
 import {WindowRef} from "../../shared/windowref.service"
 import {MatSnackBar} from "@angular/material/snack-bar"
+import {MatDialog} from "@angular/material/dialog"
+import {DialogTaskComponent} from "../../shared/dialog-task-component/dialog-task.component"
 
 @Component({
   selector: 'app-tasks',
@@ -30,7 +32,11 @@ export class TasksComponent implements OnInit, OnDestroy, AfterViewInit {
   chosenDate: any
   filterApplied = false
 
-  constructor(private tasksService: TasksService, public windowRef: WindowRef, private _snackBar: MatSnackBar) {
+  constructor(private tasksService: TasksService,
+              public windowRef: WindowRef,
+              private _snackBar: MatSnackBar,
+              public dialog: MatDialog
+              ) {
   }
 
   ngOnInit(): void {
@@ -163,6 +169,15 @@ export class TasksComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onEditTask(task: Task) {
+    let taskDialog = this.dialog.open(DialogTaskComponent, {
+      data: task,
+      width: '1000px',
+    })
+    taskDialog.afterClosed().subscribe(result => {
+      if(result){
+        console.log('Closed with: ', result)
+      }
+    })
     this.tasksService.edit(task)
   }
 

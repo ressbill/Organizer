@@ -16,3 +16,8 @@ export interface Filter{
 export interface Message {
   message: string
 }
+export interface TaskDialog{
+  name: string
+  text: string
+  date: Date
+}

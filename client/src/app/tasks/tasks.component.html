@@ -19,9 +19,9 @@
         </mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
-      <div class=" time">
+      <div class=" time" >
         <div class="24hr-example">
-          <input placeholder="choose time" aria-label="24hr format" [ngxTimepicker]="fullTime" [format]="24" formControlName="time">
+          <input placeholder="choose time" aria-label="24hr format" [ngxTimepicker]="fullTime" [format]="24" formControlName="time" class="date-picker">
           <ngx-material-timepicker #fullTime></ngx-material-timepicker>
         </div>
       </div>
@@ -38,7 +38,7 @@
 <mat-spinner *ngIf="isLoading" color="accent" class="loader">
 </mat-spinner>
 
-<div class="filter">
+<div class="filter date-picker" >
   <div class="single-date-calendar">
     <mat-form-field class="example-full-width hide-input" >
       <input matInput [matDatepicker]="singlePicker" placeholder="Choose a date" class="calendar-input" #singleDate>
@@ -71,10 +71,12 @@
   <div class = "griddy">
   <mat-card-title>{{task.name}}</mat-card-title>
   <mat-card-content >{{task.text || ' '}}</mat-card-content>
-  <mat-card-content *ngIf="windowRef.nativeWindow.document.body.clientWidth > 1000; else mobile" >{{task.date | date: 'MMM d, y, h:mm a'}}</mat-card-content >
+  <mat-card-content class="date" *ngIf="windowRef.nativeWindow.document.body.clientWidth > 1000; else mobile" >{{task.date | date: 'MMM d, y, h:mm a'}}</mat-card-content >
     <ng-template #mobile><mat-card-content>{{task.date | date: 'short'}}</mat-card-content ></ng-template>
 
   <button
+    matTooltip="edit"
+    class="edit-btn"
     (click)="onEditTask(task)"
     mat-icon-button color="accent"
     aria-label="Example icon button with a open in new tab icon">
@@ -83,6 +85,7 @@
   </div>
   <div class="deletebtn">
     <button mat-icon-button
+            matTooltip="delete"
     (click)="onDeleteTask(task)"
     aria-label="Example icon button with a open in new tab icon">
     <mat-icon color="warn">close</mat-icon>
@@ -103,4 +106,3 @@
 </div>
 <mat-spinner *ngIf="smallLoading" color="accent" class="loader">
 </mat-spinner>
-

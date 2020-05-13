@@ -26,13 +26,14 @@ import {TokenInterceptor} from "./authentication/token-interceptor"
 import {MatDatepickerModule} from '@angular/material/datepicker'
 import {MatIconModule} from "@angular/material/icon"
 import {MatNativeDateModule} from "@angular/material/core"
-import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
-import { SideNavComponent } from './layouts/main-layout/side-nav/side-nav.component'
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker'
+import {SideNavComponent} from './layouts/main-layout/side-nav/side-nav.component'
 import {MatMenuModule} from "@angular/material/menu"
 import {MatCardModule} from "@angular/material/card"
 import {MatCheckboxModule} from "@angular/material/checkbox"
 import {MatTooltipModule} from "@angular/material/tooltip"
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatSnackBarModule} from '@angular/material/snack-bar'
+import {DialogTaskComponent} from "../shared/dialog-task-component/dialog-task.component"
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     AnalyticsComponent,
     WalletComponent,
     SideNavComponent,
+    DialogTaskComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +71,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatCardModule,
     MatCheckboxModule,
     MatTooltipModule,
-    MatSnackBarModule
+    MatSnackBarModule,
 
   ],
   providers: [{
@@ -78,7 +80,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],
   bootstrap: [AppComponent],
-  entryComponents: [ErrorComponent]
+  entryComponents: [ErrorComponent, DialogTaskComponent]
 })
 export class AppModule {
 }
