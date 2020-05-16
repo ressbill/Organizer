@@ -44,6 +44,7 @@ li{
   right: -4rem;
 }
 .right-side{
+  border-radius: 4px;
   background-color: #cacaca;
   width: 100%;
   height: 100%;
@@ -64,8 +65,21 @@ li{
   align-items: center;
 }
 li{
+  background: linear-gradient(-40deg, #363637 0%, #363637 50%,#9e9e9e 51%,#9e9e9e 100% ) left ;
+  background-size: 350% ;
+  transition:  background 0.15s ease-in;
+  &:hover,&:active{
+    background-color: #363637;
+    background-size: 300%;
+    background-position: right;
 
+  }
   text-align: left;
+  height: 4rem;
+  display: flex;
+  align-content: center;
+  margin-bottom: 0 !important;
+  padding-bottom: 1rem;
   a{
     transition: color 0.2s ease-in;
     padding-left: 1rem;
@@ -74,9 +88,17 @@ li{
       color:#81d4fa ;
     }
   }
+  &:not(:last-child){
+
+  }
+}
+.logout-text{
+  text-align: center;
+  justify-content: center;
 }
 .material-icons{
   padding-right: 1rem;
+
   color: #039be5;
   @media only screen and (max-width: 600px) {
     font-size: 160%;
@@ -108,4 +130,17 @@ li{
 }
 .tt1{
   transform: translateY(-0.12rem);
+}
+.arrow{
+  font-weight: 900;
+
+}
+.app-title{
+  color:#363637 ;
+  background: none;
+  &:hover{
+    background: none;
+
+  }
+  justify-content: center;
 }

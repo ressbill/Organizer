@@ -33,7 +33,12 @@ import {MatCardModule} from "@angular/material/card"
 import {MatCheckboxModule} from "@angular/material/checkbox"
 import {MatTooltipModule} from "@angular/material/tooltip"
 import {MatSnackBarModule} from '@angular/material/snack-bar'
-import {DialogTaskComponent} from "../shared/dialog-task-component/dialog-task.component"
+import {DialogTaskComponent} from "./tasks/dialog-task-component/dialog-task.component"
+import {MatListModule} from "@angular/material/list"
+import {DialogAddIncomeComponent} from './wallet/dialog-add-income/dialog-add-income.component'
+import {DialogAddCostComponent} from './wallet/dialog-add-cost/dialog-add-cost.component'
+import {EditCostsFormComponent} from './wallet/edit-costs-form/edit-costs-form.component'
+import {DeleteDialogComponent} from "./wallet/delete-dialog/delete-dialog.component"
 
 
 @NgModule({
@@ -51,7 +56,12 @@ import {DialogTaskComponent} from "../shared/dialog-task-component/dialog-task.c
     AnalyticsComponent,
     WalletComponent,
     SideNavComponent,
-    DialogTaskComponent
+    DialogTaskComponent,
+    DialogAddIncomeComponent,
+    DialogAddCostComponent,
+    DeleteDialogComponent,
+    EditCostsFormComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -72,6 +82,7 @@ import {DialogTaskComponent} from "../shared/dialog-task-component/dialog-task.c
     MatCheckboxModule,
     MatTooltipModule,
     MatSnackBarModule,
+    MatListModule,
 
   ],
   providers: [{
@@ -80,7 +91,12 @@ import {DialogTaskComponent} from "../shared/dialog-task-component/dialog-task.c
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],
   bootstrap: [AppComponent],
-  entryComponents: [ErrorComponent, DialogTaskComponent]
+  entryComponents: [
+    ErrorComponent,
+    DialogTaskComponent,
+    DialogAddIncomeComponent,
+    DialogAddCostComponent,
+    DeleteDialogComponent]
 })
 export class AppModule {
 }

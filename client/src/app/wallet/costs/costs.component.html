@@ -1,1 +1,45 @@
-<p>costs works!</p>
+<div class="background">
+  <mat-spinner *ngIf="isLoading" color="accent"></mat-spinner>
+  <div class="flex-box" *ngIf="!isLoading">
+    <div class="costs">
+    <mat-card class="info-table" *ngIf="costs.length !=0; else emptyCosts">
+      <div  *ngFor="let cost of costs" class="grid-table">
+
+        <mat-card-subtitle>
+          {{cost.name}}
+        </mat-card-subtitle>
+        <mat-card-content>
+          {{cost.price}} $
+        </mat-card-content>
+        <button
+          (click)="onEdit(cost)"
+          matTooltip="edit"
+          class="edit-btn"
+          mat-icon-button color="accent"
+          aria-label="Example icon button with a open in new tab icon">
+          <mat-icon class="edit">open_in_new</mat-icon>
+        </button>
+        <button mat-icon-button
+                (click)="onDelete(cost)"
+                matTooltip="delete"
+                aria-label="Example icon button with a open in new tab icon"
+        >
+          <mat-icon color="warn">close</mat-icon>
+        </button>
+      </div>
+
+    </mat-card>
+    <ng-template #emptyCosts>
+      <mat-card  class="empty center">
+        <mat-card-title> No costs for the last 30 days</mat-card-title>
+      </mat-card>
+    </ng-template>
+    </div>
+
+<app-edit-costs-form [costForUpdate]="costForAnUpdate"
+                     (emitCreatedCost)="saveCost($event)"
+                     (reset)="costForAnUpdate = null"
+                     (emitUpdatedCost)="updateCost($event)"
+></app-edit-costs-form>
+  </div>
+</div>

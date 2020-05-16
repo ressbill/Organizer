@@ -2,19 +2,19 @@
 
   <ul class="dropdown menu nav" data-dropdown-menu #parent>
     <li class="menu-text app-title">Organizer</li>
-    <li class="wallet"><a routerLink="/wallet" routerLinkActive="active-link" class="align-icons">
+    <li class="wallet"><a (click)=" toggle.emit(!visible)" routerLink="/wallet" routerLinkActive="active-link" class="align-icons">
       <span class="material-icons">
       account_balance_wallet
       </span>
       Wallet</a>
       <ul class=" right-side nav ">
-        <li><a routerLink="/wallet/costs" routerLinkActive="active-link" class="align-icons ">
-          <span class="material-icons">
+        <li><a  (click)=" toggle.emit(!visible)" routerLink="/wallet/costs" routerLinkActive="active-link" class="align-icons ">
+          <span class="material-icons arrow">
           trending_down
           </span>
           Costs</a>
         </li>
-        <li><a routerLink="/wallet/income" routerLinkActive="active-link" class="align-icons">
+        <li><a (click)=" toggle.emit(!visible)" routerLink="/wallet/income" routerLinkActive="active-link" class="align-icons">
           <span class="material-icons">
             trending_up
           </span>
@@ -22,20 +22,20 @@
         </li>
       </ul>
     </li>
-    <li><a routerLink="/tasks" routerLinkActive="active-link" class="align-icons"> <span class="material-icons tt1">
+    <li><a (click)=" toggle.emit(!visible)" routerLink="/tasks" routerLinkActive="active-link" class="align-icons"> <span class="material-icons tt1">
 schedule
 </span>Tasks</a></li>
-    <li><a routerLink="/analytics" routerLinkActive="active-link" class=" align-icons"><span
+    <li><a (click)=" toggle.emit(!visible)" routerLink="/analytics" routerLinkActive="active-link" class=" align-icons"><span
       class="material-icons">
 timeline
 </span>Analytics </a>
     </li>
-    <li><a routerLink="/overview" routerLinkActive="active-link" class=" align-icons">
+    <li ><a (click)=" toggle.emit(!visible)" routerLink="/overview" routerLinkActive="active-link" class=" align-icons">
       <span class="material-icons  tt1">
 home
 </span>Home  </a>
     </li>
-    <li class="logout"><a class="list-item-link" (click)="logout()">Logout </a></li>
+    <li class="logout logout-text"><a class="list-item-link " (click)="logout()">Logout </a></li>
 
   </ul>
 

@@ -20,11 +20,11 @@ exports.getAllIncome = async (req, res, next) => {
                 .project({income:1, _id:0})
                 .sort({'income.date': -1})
                 .replaceRoot('income')
-                .match({date: {$lt:myDates.now, $gte: myDates.monthAgo }})
+                .match({date: {$lte:myDates.now, $gte: myDates.monthAgo }})
                 .skip(+req.query.offset)
                 .limit(+req.query.limit)
                 .exec()
-
+           // const income = await Wallet.findOne({owner: userId})
             res.status(200).json(income)
         } catch (e) {
             next(e)

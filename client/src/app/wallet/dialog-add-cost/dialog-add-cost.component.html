@@ -1,0 +1,25 @@
+<h4>Add new Cost</h4>
+<form [formGroup]="form" class="form" (ngSubmit)="onAdd()">
+  <mat-form-field class="example-full-width " color="accent">
+    <mat-label>Name:</mat-label>
+    <input
+      matInput formControlName="name"
+      class="custom-input"
+    >
+  </mat-form-field>
+  <span class="error-input " *ngIf="form.get('name').invalid && form.get('name').touched">
+                  <span *ngIf="form.get('name').errors['required']"> Name can't be empty</span>
+      </span>
+  <mat-form-field class="example-full-width mu2 " color="accent">
+    <mat-label>Price:</mat-label>
+    <input
+      matInput formControlName="price"
+      class="custom-input"
+      type="number"
+    >
+  </mat-form-field>
+  <span class="error-input down-error" *ngIf="form.get('price').invalid && form.get('price').touched">
+                  <span *ngIf="form.get('price').errors['required']">  Enter price</span>
+      </span>
+  <button mat-raised-button color="accent" [disabled]="form.invalid" type="submit">Add</button>
+</form>

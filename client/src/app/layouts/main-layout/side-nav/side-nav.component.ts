@@ -55,8 +55,8 @@ import {AuthService} from "../../../authentication/auth.service"
 })
 export class SideNavComponent implements OnInit, AfterViewInit {
   navState = 'start'
-  @Input() visible
-
+  @Input() visible: boolean
+  @Output() toggle = new EventEmitter<boolean>()
   @ViewChild('parent') navBar: ElementRef
   constructor(private auth:AuthService) {
   }

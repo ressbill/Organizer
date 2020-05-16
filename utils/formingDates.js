@@ -7,7 +7,12 @@ const prev = new Date(monthAgo)
 const yesterday = new Date()
 yesterday.setDate(numberOfDay-1)
 
+//Increase now date cause of comparison bug
+const now = new Date()
+const todaysNumber = now.getDate()
+now.setDate(todaysNumber +1)
 
-exports.now = new Date()
+
+exports.now = now
 exports.monthAgo =  prev
 exports.yesterday = yesterday

@@ -31,6 +31,7 @@
   align-items: center;
 }
 .tasks{
+  padding-left: 0.5rem !important;
   &:after{
 
     content: "";
@@ -73,11 +74,15 @@
   }
 }
 .display-mobile{
+
   display: none;
   @media only screen and (max-width: 680px) {
+
     display: flex;
     width: 100%;
     justify-content: space-between;
+    align-items: center;
+    background-color: #e6e6e6;
   }
 }
 .example-sidenav{
@@ -87,7 +92,13 @@
   z-index: 10;
   height: 100vh;
 }
-.top-bar{}
+.top-bar{
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
 .header-title{
   margin-left: 0;
 }
@@ -102,6 +113,26 @@
   @media only screen and (max-width: 820px) {
     font-size: 260%;
   }
+}
+.wallet{
+  padding-right: 0 !important;
+  span{
+
+    a{
+      text-align: center;
+    }
+  }
+  mat-icon{
+    transform: translateX(-0.8rem);
+    color: #00bcd4;
+    font-weight: 900;
+  }
+}
+.burger{
+  z-index: 100;
+  position: fixed;
+  top: 0.75rem;
+  right: 1rem;
 }
 ///
 ////

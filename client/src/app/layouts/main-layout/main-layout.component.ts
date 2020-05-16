@@ -27,4 +27,9 @@ export class MainLayoutComponent implements OnInit, AfterViewInit {
   openSideNav() {
     this.sideNav = !this.sideNav
   }
+
+  onToggle($event: boolean) {
+    console.log('$event',$event)
+    this.sideNav = $event
+  }
 }

@@ -33,9 +33,11 @@
       <ul class="menu  flex-dir-row">
         <li class="menu-text app-title">{{title}}</li>
       </ul>
-      <ul class="menu">
-        <li (click)="openSideNav()"><a class="list-item-link"><span class="material-icons">list</span> </a></li>
-      </ul>
+
+        <div class="burger" (click)="openSideNav()" matTooltip="open nav"><a class="list-item-link">
+          <span class="material-icons">list</span> </a>
+        </div>
+
 
 
   </div>
@@ -44,16 +46,18 @@
   <div class="top-bar-left hide-mobile">
     <ul class="dropdown menu flex-dir-row align-middle" data-dropdown-menu>
       <li class="menu-text app-title ">{{title}}</li>
-      <li>
-        <mat-menu #appMenu="matMenu">
+      <li class="wallet"><a routerLink="/wallet" routerLinkActive="active-link" class=" wallet list-item-link">Wallet
+        <span>
+           <mat-menu #appMenu="matMenu">
         <a routerLink="/wallet/costs" routerLinkActive="active-link" mat-menu-item>Costs</a>
         <a routerLink="/wallet/income" routerLinkActive="active-link" mat-menu-item>Income</a>
       </mat-menu>
         <a mat-icon-button [matMenuTriggerFor]="appMenu">
-          Wallet
-          <mat-icon>more_vert</mat-icon>
+          <mat-icon>keyboard_arrow_down</mat-icon>
         </a>
-      </li>
+        </span>
+      </a></li>
+
       <li><a routerLink="/tasks" routerLinkActive="active-link" class="tasks list-item-link" #test>Tasks</a></li>
       <li><a routerLink="/analytics" routerLinkActive="active-link" class="analytics list-item-link">Analytics </a>
       </li>
@@ -70,10 +74,10 @@
   <div class="spacer"></div>
   <div class="top-bar-right hide-mobile">
     <ul class="menu">
-      <li (click)="logout()"><a  class="list-item-link">Logout </a></li>
+      <li (click)="logout()"><a  class="list-item-link ">Logout </a></li>
     </ul>
   </div>
 </div>
 
-<app-side-nav [visible]="sideNav"></app-side-nav>
+<app-side-nav [visible]="sideNav" (toggle)="onToggle($event)"></app-side-nav>
 <router-outlet></router-outlet>

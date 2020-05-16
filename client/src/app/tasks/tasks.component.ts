@@ -1,14 +1,14 @@
 import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core'
 import {Filter, Message, Task} from "../../shared/interfaces"
 import {TasksService} from "./tasks.service"
-import {Subscription} from "rxjs"
+import {Subscription, SubscriptionLike} from "rxjs"
 import {FormControl, FormGroup, Validators} from "@angular/forms"
 import {MatCheckbox} from "@angular/material/checkbox"
 import {MatDatepicker} from "@angular/material/datepicker"
 import {WindowRef} from "../../shared/windowref.service"
 import {MatSnackBar} from "@angular/material/snack-bar"
 import {MatDialog} from "@angular/material/dialog"
-import {DialogTaskComponent} from "../../shared/dialog-task-component/dialog-task.component"
+import {DialogTaskComponent} from "./dialog-task-component/dialog-task.component"
 
 @Component({
   selector: 'app-tasks',
@@ -20,7 +20,7 @@ export class TasksComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('history') historyRef: MatCheckbox
   @ViewChild('singlePicker') pickerRef: MatDatepicker<any>
   tasks: Task[] = []
-  sub: Subscription
+  sub: SubscriptionLike[] = []
   form: FormGroup
   emptyResponse = false
   sending = false
@@ -52,14 +52,13 @@ export class TasksComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy(): void {
-    if (this.sub) {
-      this.sub.unsubscribe()
-    }
-
+    console.log(this.sub)
+    this.sub.forEach(s => {
+      s.unsubscribe()
+    })
   }
 
   ngAfterViewInit(): void {
-    console.log(window)
   }
 
   //Resetting all controls except date. Sending task to a server.
@@ -83,7 +82,7 @@ export class TasksComponent implements OnInit, OnDestroy, AfterViewInit {
     this.form.get('name').clearValidators()
     this.form.reset()
     this.form.get('date').setValue(task.date)
-    this.tasksService.create(task).subscribe((response) => {
+    this.sub.push(this.tasksService.create(task).subscribe((response) => {
         this._snackBar.open('Post created successfully', 'Ok!', {
           duration: 2000,
           verticalPosition: 'top',
@@ -97,7 +96,7 @@ export class TasksComponent implements OnInit, OnDestroy, AfterViewInit {
       error => {
         this.isLoading = false
       })
-
+    )
   }
 
   setNameValidators() {
@@ -115,6 +114,7 @@ export class TasksComponent implements OnInit, OnDestroy, AfterViewInit {
       }
       const selectedDate = this.singleDate.nativeElement.value
       if (selectedDate) {
+        this.historyRef.checked = false
         filter.date = selectedDate
       }
       this.limit = this.step
@@ -174,11 +174,14 @@ export class TasksComponent implements OnInit, OnDestroy, AfterViewInit {
       width: '1000px',
     })
     taskDialog.afterClosed().subscribe(result => {
-      if(result){
-        console.log('Closed with: ', result)
+      if(result as Task){
+        this._snackBar.open('Task updated successfully', 'Ok!', {
+          duration: 2000,
+        })
+        const idx = this.tasks.findIndex(t => t._id === result._id)
+        this.tasks[idx] = result
       }
     })
-    this.tasksService.edit(task)
   }
 
   private fetch(filter: Filter = {}) {
@@ -190,7 +193,7 @@ export class TasksComponent implements OnInit, OnDestroy, AfterViewInit {
     }
     const concatFilter = {...params, ...filter}
     console.log(concatFilter)
-    this.sub = this.tasksService.fetch(concatFilter).subscribe((response: Task[]) => {
+    this.sub.push( this.tasksService.fetch(concatFilter).subscribe((response: Task[]) => {
       console.log(response)
       if (response.length < this.limit) {
         this.emptyResponse = true
@@ -199,6 +202,6 @@ export class TasksComponent implements OnInit, OnDestroy, AfterViewInit {
       this.isLoading = false
       this.smallLoading = false
       this.tasks = this.tasks.concat(response)
-    })
+    }))
   }
 }

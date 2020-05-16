@@ -23,7 +23,7 @@ export class TasksService {
   delete(task: Task): Observable<Message>{
     return this.http.delete<Message>(`/api/organizer/tasks/${task._id}`)
   }
-  edit(task: Task): Observable<Message>{
-    return this.http.patch<Message>(`/api/organizer/tasks/${task._id}`, task)
+  patch(task: Task): Observable<Task>{
+    return this.http.patch<Task>(`/api/organizer/tasks/${task._id}`, task)
   }
 }

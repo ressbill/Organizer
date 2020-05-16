@@ -20,7 +20,7 @@ exports.getAllCosts = async (req, res, next) => {
                 .project({costs:1, _id:0})
                 .sort({'costs.date': -1})
                 .replaceRoot('costs')
-                .match({date: {$lt:myDates.now, $gte: myDates.monthAgo }})
+                .match({date: {$lte:myDates.now, $gte: myDates.monthAgo }})
                 .skip(+req.query.offset)
                 .limit(+req.query.limit)
                 .exec()

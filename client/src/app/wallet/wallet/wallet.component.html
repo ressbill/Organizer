@@ -1,0 +1,100 @@
+
+<!--<mat-slider-->
+<!--  thumbLabel-->
+<!--  [displayWith]="formatLabel"-->
+<!--  tickInterval="1000"-->
+<!--  min="1"-->
+<!--  max="100000"></mat-slider>-->
+<mat-card class="main">
+  <mat-spinner *ngIf="isLoading" color="accent"></mat-spinner>
+  <div *ngIf="!isLoading">
+<div class="titles">
+  <div class="income">
+    <a class = "header-link"  mat-button  routerLink="/wallet/income" color="accent">Income</a>
+    <mat-card class="info-table" *ngIf="income.length !=0; else empty">
+      <div  *ngFor="let income of income" class="grid-table">
+
+        <mat-card-subtitle>
+            {{income.name}}
+        </mat-card-subtitle>
+        <mat-card-content>
+          {{income.amount}} $
+        </mat-card-content>
+      </div>
+    </mat-card>
+    <ng-template #empty>
+      <mat-card  class="empty center">
+          <mat-card-subtitle> No income for the last 30 days</mat-card-subtitle>
+      </mat-card>
+    </ng-template>
+
+    <a class ="add-links" (click)="addIncome()" mat-button color="accent">Add</a>
+  </div>
+  <div class = "costs">
+    <a class = "header-link" routerLink="/wallet/costs" mat-button color="warn">Costs</a>
+    <mat-card class="info-table" *ngIf="costs.length !=0; else emptyCosts">
+      <div  *ngFor="let cost of costs" class="grid-table">
+
+        <mat-card-subtitle>
+          {{cost.name}}
+        </mat-card-subtitle>
+        <mat-card-content>
+          {{cost.price}} $
+        </mat-card-content>
+      </div>
+    </mat-card>
+    <ng-template #emptyCosts>
+      <mat-card  class="empty center">
+        <mat-card-subtitle> No costs for the last 30 days</mat-card-subtitle>
+      </mat-card>
+    </ng-template>
+    <a class ="add-links" (click)="addCost()" mat-button color="warn">Add</a>
+  </div>
+
+</div>
+  <div class="overall">
+      <div class="card-container">
+        <div class="card positive">
+            <h5>Month's Income</h5>
+            <h2>{{monthIncome}} $
+              <span *ngIf="monthIncome>=monthCosts"><i class="material-icons green-text">
+           arrow_upward
+          </i>
+           </span>
+              <span *ngIf="monthIncome<monthCosts"><i class="material-icons red-text">
+           arrow_downward
+          </i>
+           </span></h2>
+          <div class="stats" >
+            <span>Your income is </span>
+            <span *ngIf="monthIncome>monthCosts">{{monthIncome-monthCosts}}$ higher than costs</span>
+            <span *ngIf="monthIncome<monthCosts">{{monthCosts-monthIncome}}$ less than costs</span>
+            <span *ngIf="monthCosts===monthIncome"> equal to costs</span>
+          </div>
+
+        </div>
+        <div class="card negative">
+          <h5>Month's Costs</h5>
+          <h2>{{monthCosts}} $
+            <span *ngIf="monthCosts>monthIncome"><i class="material-icons red-text">
+           arrow_upward
+          </i>
+           </span>
+            <span *ngIf="monthCosts<=monthIncome"><i class="material-icons green-text">
+           arrow_downward
+          </i>
+           </span>
+
+          </h2>
+          <div class="stats" >
+            <span>Your costs are </span>
+            <span *ngIf="monthCosts>monthIncome">{{monthCosts-monthIncome}}$ higher than income</span>
+            <span *ngIf="monthCosts<monthIncome">{{monthIncome-monthCosts}}$ less than income</span>
+            <span *ngIf="monthCosts===monthIncome"> equal to income</span>
+          </div>
+        </div>
+      </div>
+  </div>
+  </div>
+</mat-card>
+

@@ -50,6 +50,12 @@
   <div class="selected-date">
     <div>
       <span *ngIf="chosenDate">Tasks on   </span><span class="chosen-date">{{chosenDate}}</span>
+      <span class="chosen-date" *ngIf="!singleDate.value && filterApplied && history.checked === true">History </span>
+      <span class="chosen-date"
+            *ngIf="
+            !singleDate.value && history.checked === false">
+        Upcoming </span>
+
     </div>
 
   </div>
@@ -101,7 +107,7 @@
 </div>
 
 <ng-template #empty>
- <p class="centered"> No tasks</p>
+ <p class="centered"> No tasks yet</p>
 </ng-template>
 </div>
 <mat-spinner *ngIf="smallLoading" color="accent" class="loader">

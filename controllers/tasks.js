@@ -106,7 +106,7 @@ exports.update = async (req, res, next) => {
         try {
             const candidate = await Task.findOneAndUpdate(
                 {creator: req.userData.userId, _id: req.params.id},
-                {$set: {name: req.body.name, text: req.body.text}},
+                {$set: {name: req.body.name, text: req.body.text, date: req.body.date}},
                 {new: true, useFindAndModify: false}
             )
             if (candidate) {
