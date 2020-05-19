@@ -55,6 +55,9 @@
   color: $secondary;
 }
 .hide-mobile{
+  li{
+    margin-right: 1rem;
+  }
   @media only screen and (max-width: 680px) {
     display: none;
   }
@@ -134,38 +137,3 @@
   top: 0.75rem;
   right: 1rem;
 }
-///
-////
-//mat-toolbar{
-//background-color: #bdbdbd;
-//  color: #424242;
-//}
-//.menu-list{
-//  width: 100%;
-//  margin: 0;
-//  display: flex;
-//  justify-content: space-between;
-//  align-items: center;
-//  li{
-//    list-style: none;
-//    margin: 0 2rem;
-//    font-size: 90%;
-//    a{
-//      font-weight: 400;
-//
-//    }
-//
-//  }
-//}
-//
-//
-//.menu-list{
-//
-//
-//li{
-//  .spacer{
-//    flex: 1 1 0;
-//    margin: 0;
-//  }
-//}
-//}

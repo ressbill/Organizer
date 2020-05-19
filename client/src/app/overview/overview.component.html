@@ -6,7 +6,7 @@
   </div>
   <div *ngIf="!isLoading">
   <section class="upcoming">
-    <div class="header"> <h3>UPCOMING TASKS </h3></div>
+    <div class="header" *ngIf="tasks.length !== 0"> <h3>UPCOMING TASKS </h3></div>
     <section class="tasks" *ngIf="tasks.length != 0; else empty ">
 
       <div class="cards" *ngFor="let task of tasks">
@@ -21,18 +21,17 @@
       </div>
     </section>
     <ng-template #empty>
-      <div class="empty"><h5>There are no upcoming tasks. Create a new <a routerLink="/tasks" class="income">one</a></h5></div>
+      <div class="empty"><p>There are no upcoming tasks. Create a new <a routerLink="/tasks" class="income">one</a></p></div>
     </ng-template>
   </section>
     <div class="centered">
       <h2>Monthly Budget</h2>
     </div>
   <div *ngIf="noWallet" class="centered">{{message}} <a routerLink="/wallet/income" class="income">income</a> or a <a  routerLink="/wallet/income" class="cost">cost</a>  </div>
-  <section class="analytics" *ngIf="!noWallet">
+  </div>
+  <section class="analytics" >
     <canvas #doughnut></canvas>
   </section>
 
-
-  </div>
 </div>
 </div>
