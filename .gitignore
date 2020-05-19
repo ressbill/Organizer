@@ -12,6 +12,7 @@ pids
 *.seed
 *.pid.lock
 
+utils/keys.dev.js
 
 # Dependency directories
 node_modules/

@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
+const path = require('path')
 const keys = require('./utils/keys')
 const app = express()
 mongoose.connect(keys.mongoURI,{useUnifiedTopology: true , useNewUrlParser: true})
@@ -36,4 +37,17 @@ app.use( (error, req, res, next) => {
     }
     res.status(error.status).json({message: error.message})
 })
+
+if (process.env.NODE_ENV === 'production'){
+    app.use(express.static('client/dist/client'))
+
+    app.get('*', (req, res) => {
+        res.sendFile(
+            path.resolve(
+                __dirname,'client', 'dist', 'client', 'index.html'
+            )
+        )
+    })
+}
+
 module.exports = app
