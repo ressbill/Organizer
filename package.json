@@ -5,7 +5,7 @@
   "main": "index.js",
   "engines": {
     "node": "12.13.1",
-    "npm":" 6.12.1"
+    "npm": " 6.12.1"
   },
   "scripts": {
     "start": "node index.js",
@@ -43,6 +43,7 @@
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.25.0",
     "mongoose": "^5.9.10",
+    "mongoose-unique-validator": "^2.0.3",
     "morgan": "^1.10.0"
   }
 }
