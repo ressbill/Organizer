@@ -3,7 +3,7 @@ import {Cost} from "../../../shared/interfaces"
 import {CostService} from "./cost.service"
 import {SubscriptionLike} from "rxjs"
 import {MatDialog} from "@angular/material/dialog"
-import {DeleteDialogComponent} from "../delete-dialog/delete-dialog.component"
+import {DeleteDialogComponent} from "../delete-dialog-cost/delete-dialog.component"
 import {MatSnackBar} from "@angular/material/snack-bar"
 
 @Component({
@@ -34,7 +34,9 @@ export class CostsComponent implements OnInit, OnDestroy {
 
   saveCost($event: Cost) {
     this.costs.unshift($event)
-    this.snackBar.open( ' Cost created' ,'Ok!')
+    this.snackBar.open( ' Cost created' ,'Ok!',{
+      duration: 3000
+    })
   }
 
   onDelete(cost:Cost) {
@@ -46,15 +48,13 @@ export class CostsComponent implements OnInit, OnDestroy {
     })
     dialogRef.afterClosed().subscribe(answer => {
       if(answer){
-        this.snackBar.open(answer.message + ' successfully!' ,'Ok!')
+        this.snackBar.open(answer.message + ' successfully!' ,'Ok!', {
+          duration: 3000
+        })
         const idx = this.costs.findIndex(c=> c._id === answer.id)
         this.costs.splice(idx,1)
       }
 
-      // if (answer === 'yes') {
-      //   //
-      //   console.log('delete')
-      // }
     })
   }
 
@@ -65,7 +65,9 @@ export class CostsComponent implements OnInit, OnDestroy {
   updateCost($event: Cost) {
     const idx = this.costs.findIndex(c => c._id === $event._id)
     this.costs[idx] = $event
-    this.snackBar.open( ' Cost updated successfully' ,'Ok!')
+    this.snackBar.open( ' Cost updated successfully' ,'Ok!',{
+      duration: 3000
+    })
 
   }
 }

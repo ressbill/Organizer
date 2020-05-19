@@ -1,8 +1,8 @@
 import {AfterViewInit, Component, Inject, OnInit} from '@angular/core'
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog"
-import {Cost} from "../../../shared/interfaces"
+import {Cost} from "../../../../shared/interfaces"
 import {FormControl, FormGroup, Validators} from "@angular/forms"
-import {CostService} from "../costs/cost.service"
+import {CostService} from "../cost.service"
 
 @Component({
   selector: 'app-dialog-add-cost',

@@ -1,0 +1,30 @@
+<mat-card>
+  <h4>{{newIncome? 'Create an income': 'Update income'}}</h4>
+  <form  class = "form" [formGroup]="form" (ngSubmit)="onSave()">
+    <div class="inputs">
+      <mat-form-field  color="accent">
+        <mat-label>Name</mat-label>
+        <input  formControlName="name" matInput  (focus)="setValidatorsName()">
+        <mat-error *ngIf="form.get('name').hasError('required')">
+          Name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field  color="accent">
+        <mat-label>Amount</mat-label>
+        <input matInput formControlName="amount" type="number" (focus)="setValidatorsPrice()">
+        <mat-error *ngIf="form.get('amount').hasError('required')">
+          Amount is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <div>
+        <mat-checkbox #checkbox (click)="resetToNew()">New</mat-checkbox>
+        <button mat-raised-button class="save-button"
+                color="accent" type="submit" [disabled] = "form.invalid || sending || form.disabled || disableBtn" > Save
+        </button>
+      </div>
+
+    </div>
+
+  </form>
+</mat-card>

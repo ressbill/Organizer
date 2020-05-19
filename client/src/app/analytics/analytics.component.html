@@ -1,0 +1,35 @@
+<div class="background">
+  <div class="main">
+    <div *ngIf="isLoading">
+      <mat-spinner class="centered" color="accent"></mat-spinner>
+    </div>
+    <div *ngIf="noWallet" class="centered">You have got no wallet. To get one add an
+      <a routerLink="/wallet/income" class="income">income</a>
+      or a <a  routerLink="/wallet/income" class="income">cost</a></div>
+    <div class="charts">
+      <canvas #costs></canvas>
+      <canvas #income></canvas>
+      <div class="cards">
+        <div class="positive stats-card" *ngIf="this.incomeStats">
+          <h4> <strong>{{incomeStats.total| currency}}</strong></h4>
+          <p>Your average facilities business income is {{incomeStats.average| currency}}</p>
+          <p *ngIf="this.costStats && this.incomeStats.total > this.costStats.total">That
+            is {{incomeStats.total - costStats.total | currency}} higher than costs</p>
+          <p *ngIf="this.costStats && this.incomeStats.total < this.costStats.total">That
+            is {{incomeStats.total - costStats.total | multiplyBy:-1 | currency }} lower than costs</p>
+        </div>
+        <div class="negative stats-card" *ngIf="this.costStats">
+          <h4><strong>{{costStats.total| currency}}</strong></h4>
+          <p>Your average facilities  cost is {{costStats.average| currency}}</p>
+          <p *ngIf="this.incomeStats && this.costStats.total > this.incomeStats.total">That
+            is {{costStats.total - incomeStats.total | currency}} higher than income</p>
+          <p *ngIf="this.incomeStats && this.costStats.total < this.incomeStats.total">That
+            is {{costStats.total - incomeStats.total | multiplyBy:-1 | currency }} lower than income</p>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

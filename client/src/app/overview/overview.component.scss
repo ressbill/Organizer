@@ -1,9 +1,5 @@
 .background{
-  background-color: #212121;
-  height: 93vh;
-  position: static;
-  margin: 0;
-  padding: 0;
+
   &:after{
     content: "";
     display: table;
@@ -17,8 +13,8 @@
 }
 .main{
   width: 80%;
-  background-color: #e0e0e0;
-  margin: 2rem auto;
+  background-color: white;
+  margin: 4rem auto;
   position: relative;
 
 }
@@ -30,6 +26,7 @@ display: flex;
   }
 }
 .header{
+  color: #424242;
   text-align: center;
   display: flex;
 
@@ -38,7 +35,12 @@ display: flex;
     margin: auto;
     @media only screen and (max-width: 1000px) {
       margin-top: 1rem;
+      margin-bottom: 2rem;
     }
+    @media only screen and (max-width: 600px) {
+      font-size: 1.7rem;
+    }
+
   }
 }
 .tasks{
@@ -46,16 +48,121 @@ display: flex;
   width: 100%;
   flex-wrap: wrap;
   position: relative;
+  justify-content: space-evenly;
 }
 .cards{
+  margin-bottom: 2rem;
+  perspective: 300rem;
   border-radius: 4px;
-  display: block;
   position: relative;
+  width: 230px;
+  height: 15rem;
+  overflow: hidden;
+  box-shadow: 1px 1px 1px #bdbdbd;
+  .upper{
+    display: block;
+    height: 43%;
+    transform: skewY(-8deg);
+    overflow: hidden;
+    z-index: -1000;
+    margin-top: -1.3rem;
+    background-color: #4fc3f7;
+  }
+  .lower{
+    margin-top: -1rem;
+    display: block;
+    height: 74%;
+    background: #eeeeee;
+  }
+ h4{
+   transform: skewY(8deg) translateX(-50%) translateY(-25%);
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   text-align: center;
+   color: #eeeeee;
+
+ }
+  p{
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    color: #29b6f6;
+    z-index: 10;
+    text-align: center;
+  }
+//  margin: 1rem auto;
+
+  //box-shadow: 3px 2px 3px #9e9e9e;
+
+  &:hover &__side--front{
+    transform: rotateY(180deg);
+  }
+  &:hover &__side--back{
+    transform: rotateY(0);
+    background-color: #4fc3f7;
+  }
+  &__side{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 15rem;
+    transition: all 0.7s ease;
+
+    backface-visibility: hidden;
+
+    &--front{
+
+    }
+    &--back{
+      background-color: #4fc3f7;
+      transform: rotateY(180deg);
+      display: flex;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      color:#eeeeee ;
+    }
+  }
+}
+.centered{
+  margin: 0 auto;
+  text-align: center;
+}
+.analytics{
+  display: block;
+  height: 400px;
+  @media only screen and (max-width: 650px) {
+    height: 300px;
+  }
+}
+h2{
   margin: 1rem auto;
-  background-color: #cc4b37;
-  min-width: 140px;
-  min-height: 100px;
-  width: 220px;
-  height: 220px;
-  box-shadow: 3px 2px 3px #9e9e9e;
+  display: inline-block;
+  text-align: center;
+  background: linear-gradient( to left,#e57373,#29b6f6);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.empty{
+  justify-content: center;
+  display: flex;
+  text-align: center;
+  margin: 0 auto;
+  align-content: center;
+  align-items: center;
+  h5{ margin: 0}
+  p{margin: 0}
+  transform: translateX(-9rem);
+}
+.centered{
+  text-align: center;
+}
+.income{
+  color: #4fc3f7;
+}
+.cost{
+  color: #4fc3f7;
 }

@@ -1,0 +1,45 @@
+<div class="background">
+  <mat-spinner *ngIf="isLoading" color="accent"></mat-spinner>
+  <div class="flex-box" *ngIf="!isLoading">
+    <div class="costs">
+      <mat-card class="info-table" *ngIf="income.length !=0; else emptyIncome">
+        <div *ngFor="let income of income" class="grid-table">
+
+          <mat-card-subtitle>
+            {{income.name}}
+          </mat-card-subtitle>
+          <mat-card-content>
+            {{income.amount}} $
+          </mat-card-content>
+          <button
+            (click)="onEdit(income)"
+            matTooltip="edit"
+            class="edit-btn"
+            mat-icon-button color="accent"
+            aria-label="Example icon button with a open in new tab icon">
+            <mat-icon class="edit">open_in_new</mat-icon>
+          </button>
+          <button mat-icon-button
+                  (click)="onDelete(income)"
+                  matTooltip="delete"
+                  aria-label="Example icon button with a open in new tab icon"
+          >
+            <mat-icon color="warn">close</mat-icon>
+          </button>
+        </div>
+
+      </mat-card>
+      <ng-template #emptyIncome>
+        <mat-card class="empty center">
+          <mat-card-title> No income for the last 30 days</mat-card-title>
+        </mat-card>
+      </ng-template>
+    </div>
+
+    <app-edit-income-form [incomeForUpdate]="incomeForAnUpdate"
+                         (emitCreatedIncome)="saveIncome($event)"
+                         (reset)="incomeForAnUpdate = null"
+                         (emitUpdatedIncome)="updateIncome($event)"
+    ></app-edit-income-form>
+  </div>
+</div>

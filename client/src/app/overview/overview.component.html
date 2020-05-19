@@ -1,33 +1,38 @@
 <div class="background">
 
 <div class="main">
+  <div *ngIf="isLoading" >
+    <mat-spinner class="centered"  color="accent"></mat-spinner>
+  </div>
+  <div *ngIf="!isLoading">
   <section class="upcoming">
     <div class="header"> <h3>UPCOMING TASKS </h3></div>
-    <section class="tasks">
-      <div class="cards">
-        <h4>Task Name</h4>
-        <p>Task time</p>
-      </div>
-      <div class="cards">Rotate</div>
-      <div class="cards">Rotate</div>
-      <div class="cards">Rotate</div>
+    <section class="tasks" *ngIf="tasks.length != 0; else empty ">
 
+      <div class="cards" *ngFor="let task of tasks">
+        <div class="cards__side cards__side--front">
+          <div class="upper"><h4>{{task.name}}</h4></div>
+          <div class="lower"><p>{{task.date | date: 'MMMM d , h:mm a'}}</p></div>
+
+        </div>
+        <div class="cards__side cards__side--back">
+            {{task.text? task.text: 'No description'}}
+        </div>
+      </div>
     </section>
+    <ng-template #empty>
+      <div class="empty"><h5>There are no upcoming tasks. Create a new <a routerLink="/tasks" class="income">one</a></h5></div>
+    </ng-template>
+  </section>
+    <div class="centered">
+      <h2>Monthly Budget</h2>
+    </div>
+  <div *ngIf="noWallet" class="centered">{{message}} <a routerLink="/wallet/income" class="income">income</a> or a <a  routerLink="/wallet/income" class="cost">cost</a>  </div>
+  <section class="analytics" *ngIf="!noWallet">
+    <canvas #doughnut></canvas>
   </section>
 
-    <p>Content</p>
-    <p>Content</p>
-    <p>Content</p>
-    <p>Content</p>
-    <p>Content</p>
-    <p>Content</p>
-    <p>Content</p>
-    <p>Content</p>
-    <p>Content</p>
-    <p>Content</p>
-    <p>Content</p>
-    <p>Content</p>
 
-
+  </div>
 </div>
 </div>

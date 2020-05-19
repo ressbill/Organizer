@@ -1,0 +1,30 @@
+
+.inputs{
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+mat-card{
+  padding: 3rem;
+  margin: 2rem;
+  @media only screen and (max-width: 1000px) {
+    padding: 1rem;
+    margin-left: 0;
+    align-self: center;
+  }
+  @media only screen and (max-width: 650px ) {
+    width: 80%;
+    margin: 2rem auto;
+  }
+}
+button{
+  margin-top: 0.6rem;
+  transform: translateX(50%);
+}
+h4{
+  text-align: center;
+  color: #03a9f4;
+}

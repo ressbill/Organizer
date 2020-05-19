@@ -17,8 +17,8 @@ export class IncomeService {
     return this.http.get<Income[]>('api/wallet/income')
   }
 
-  update(income: Income): Observable<Income[]> {
-    return this.http.patch<Income[]>(`api/wallet/income/${income._id}`, income)
+  update(income: Income): Observable<Income> {
+    return this.http.patch<Income>(`api/wallet/income/${income._id}`, income)
   }
 
   delete(id: string): Observable<Message> {

@@ -4,7 +4,7 @@ import {CostService} from "../costs/cost.service"
 import {Subscription} from "rxjs"
 
 @Component({
-  selector: 'app-delete-dealog',
+  selector: 'app-delete-dialog',
   templateUrl: './delete-dialog.component.html',
   styleUrls: ['./delete-dialog.component.scss']
 })

@@ -39,7 +39,7 @@ exports.getAllTasks = async (req, res, next) => {
         end.setHours(23, 59, 59, 59)
         query.date = {
             $gte: start,
-            $lt: end
+            $lte: end
         }
     }
     try {

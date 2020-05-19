@@ -38,3 +38,32 @@ export interface Income {
   amount: number
   _id?: string
 }
+
+export interface CostsChart {
+  label: string
+  costs: number
+}
+
+export interface IncomeChart {
+  label: string
+  income: number
+}
+
+export interface CostsData {
+  totalAmount: number
+  total: number
+  average: number
+}
+
+export interface IncomeData {
+  totalAmount: number
+  total: number
+  average: number
+}
+
+export interface AnalyticsData {
+  costsChart: CostsChart[]
+  incomeChart: IncomeChart[]
+  costs: CostsData
+  income: IncomeData
+}

@@ -57,7 +57,7 @@ exports.login = async (req, res, next) => {
                  const token = jwt.sign(
                      {email: candidate.email, userId: candidate._id},
                      jwtSecret,
-                     {expiresIn: 60*100})
+                     {expiresIn: 60*360})
                  res.status(200).json({token})
              }else {
                  res.status(409).json({message: 'Password is false'})

@@ -52,7 +52,6 @@ export class TasksComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy(): void {
-    console.log(this.sub)
     this.sub.forEach(s => {
       s.unsubscribe()
     })
@@ -192,9 +191,7 @@ export class TasksComponent implements OnInit, OnDestroy, AfterViewInit {
 
     }
     const concatFilter = {...params, ...filter}
-    console.log(concatFilter)
     this.sub.push( this.tasksService.fetch(concatFilter).subscribe((response: Task[]) => {
-      console.log(response)
       if (response.length < this.limit) {
         this.emptyResponse = true
       }

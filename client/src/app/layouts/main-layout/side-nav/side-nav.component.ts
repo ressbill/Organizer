@@ -36,7 +36,7 @@ import {AuthService} from "../../../authentication/auth.service"
         animate(300, style({
           height: '100vh',
           opacity: 0.8,
-          background:'#9e9e9e'
+          background:'#616161'
         }))
       ]),
       transition(':leave', [

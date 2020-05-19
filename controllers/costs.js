@@ -1,14 +1,16 @@
 const Wallet = require('../models/Wallet').wallet
 const {validationResult} = require('express-validator')
 const validation = require('../utils/validation')
-const myDates = require('../utils/formingDates')
 
 exports.getAllCosts = async (req, res, next) => {
+    const monthAgo = new Date()
+    const numberOfDay = monthAgo.getDate()
+    monthAgo.setDate(numberOfDay - 30)
     const userId = require('mongoose').Types.ObjectId(req.userData.userId)
-    if (!req.query.limit){
+    if (!req.query.limit) {
         req.query.limit = 20
     }
-    if (!req.query.offset){
+    if (!req.query.offset) {
         req.query.offset = 0
     }
     if (!req.query.all) {
@@ -17,10 +19,10 @@ exports.getAllCosts = async (req, res, next) => {
                 .aggregate()
                 .match({owner: userId})
                 .unwind('costs')
-                .project({costs:1, _id:0})
+                .project({costs: 1, _id: 0})
                 .sort({'costs.date': -1})
                 .replaceRoot('costs')
-                .match({date: {$lte:myDates.now, $gte: myDates.monthAgo }})
+                .match({date: {$lte: new Date(), $gte: monthAgo}})
                 .skip(+req.query.offset)
                 .limit(+req.query.limit)
                 .exec()
@@ -35,7 +37,7 @@ exports.getAllCosts = async (req, res, next) => {
                 .aggregate()
                 .match({owner: userId})
                 .unwind('costs')
-                .project({costs:1, _id:0})
+                .project({costs: 1, _id: 0})
                 .sort({'costs.date': -1})
                 .replaceRoot('costs')
                 .skip(+req.query.offset)

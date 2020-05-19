@@ -36,9 +36,12 @@ import {MatSnackBarModule} from '@angular/material/snack-bar'
 import {DialogTaskComponent} from "./tasks/dialog-task-component/dialog-task.component"
 import {MatListModule} from "@angular/material/list"
 import {DialogAddIncomeComponent} from './wallet/dialog-add-income/dialog-add-income.component'
-import {DialogAddCostComponent} from './wallet/dialog-add-cost/dialog-add-cost.component'
-import {EditCostsFormComponent} from './wallet/edit-costs-form/edit-costs-form.component'
-import {DeleteDialogComponent} from "./wallet/delete-dialog/delete-dialog.component"
+import {DialogAddCostComponent} from './wallet/costs/dialog-add-cost/dialog-add-cost.component'
+import {EditCostsFormComponent} from './wallet/costs/edit-costs-form/edit-costs-form.component'
+import {DeleteDialogComponent} from "./wallet/delete-dialog-cost/delete-dialog.component";
+import { EditIncomeFormComponent } from './wallet/income/edit-income-form/edit-income-form.component';
+import { DeleteDialogIncomeComponent } from './wallet/delete-dialog-income/delete-dialog-income.component'
+import {MultByPipe} from "./analytics/mult-by.pipe"
 
 
 @NgModule({
@@ -61,6 +64,9 @@ import {DeleteDialogComponent} from "./wallet/delete-dialog/delete-dialog.compon
     DialogAddCostComponent,
     DeleteDialogComponent,
     EditCostsFormComponent,
+    EditIncomeFormComponent,
+    DeleteDialogIncomeComponent,
+    MultByPipe
 
   ],
   imports: [
@@ -96,7 +102,8 @@ import {DeleteDialogComponent} from "./wallet/delete-dialog/delete-dialog.compon
     DialogTaskComponent,
     DialogAddIncomeComponent,
     DialogAddCostComponent,
-    DeleteDialogComponent]
+    DeleteDialogComponent,
+    DeleteDialogIncomeComponent]
 })
 export class AppModule {
 }
